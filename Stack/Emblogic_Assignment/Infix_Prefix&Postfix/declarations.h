@@ -1,0 +1,15 @@
+extern Stack *stk;
+extern char op[20];
+extern int len;
+extern int a;
+char *getString();
+char *revString(char *);
+Stack *creatStack();
+int isOpening (char);
+int isClosing(char);
+int isOperand(char);
+int isOperator(char);
+int isEmpty();
+int pushStack(char);
+int compare(char);
+int popStack();

@@ -1,0 +1,12 @@
+INPUT			POSTfIX
+a+b*c			abc*+
+(a+b)*c 		ab+c*
+a+(b*c) 		abc*+
+a*(b+c)/d		abc+*d/
+a*b+c/d-e		ab*cd/+e-
+(a+b)*(c-d)		ab+cd-*
+a+b*c-d/e		abc*+de/-
+a*b+c/(d-e)		ab*cde-/+
+(a+b)*(c + d)-e/f	ab+cd+*ef/-
+a*(b+c*(d-e))/f		abcde-*+*f/
+(a-b/c)*(a/k-l)         abc/-ak/l-*
