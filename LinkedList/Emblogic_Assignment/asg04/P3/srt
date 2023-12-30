@@ -1,0 +1,70 @@
+#include "headers.h"
+#include "declarations.h"
+
+void sort(Node *start)
+{
+    printf("%s : Begin\n", __func__);
+
+    if (start == NULL || start->next == NULL)
+    {
+        printf("%s : End (List is empty or has only one element)\n", __func__);
+        return;
+    }
+
+    Node* current = start->next->next;  //To point 2nd element
+    Node* prev = start;
+    Node* stop = NULL;
+    int pe;
+    int flag;
+    Node *var;
+
+    while (current != NULL) 
+    {
+        Node* np = current; // Fixed np initialization
+        pe = np->data;  //2nd element is picked
+        flag = 0;
+	var = NULL;
+        stop = start->next;  //1st element
+	printf("%d : stop : %p\n", __LINE__, (void*)stop);
+	printf("%d : current : %p\n", __LINE__, (void*)current);
+
+        while (stop != current) // The purpose of this loop is to iterate through the sorted part of the list to find the correct insertion point for the current element.
+	{
+		printf("\nInside inner loop\n");
+            if (pe < stop->data) 
+	    {
+                flag = 1;
+                var = stop; //It is used to keep track of the insertion point where the current element will be placed.
+                break;
+            }
+            prev = stop; // Move prev one step ahead but one step before where stop points
+	   printf("prev : %p\n", (void*)prev);
+            stop = stop->next;
+        }
+
+        if (flag == 1) 
+	{
+            while (current != var) 
+	    {
+	   	printf("prev->next : %p\n", (void*)prev->next);
+	   	printf("current : %p\n", (void*)current);
+	   	printf("current->next : %p\n", (void*)current->next);
+		if(current->next)
+                	prev->next = current->next; // Update links to remove current from its current position
+		else
+			prev->next = NULL;
+                current->next = var->next; // Update the link of the current node
+                var->next = current; // Insert current after var
+                var = current; //V.I, var points to last node upto which array is sorted
+                current = prev->next; // Move current to the next unsorted node
+            }
+        }
+       	else 
+	{
+            prev = current;
+            current = current->next;
+        }
+    }
+
+    printf("%s : End\n", __func__);
+}

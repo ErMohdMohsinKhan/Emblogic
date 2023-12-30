@@ -1,0 +1,231 @@
+#include "headers.h"
+#include "declarations.h"
+Node* creatLinkList(Node* start)
+{
+	printf("%s : Begin\n", __func__);
+	if(!start)
+                return (*ctNd)(start);
+        else
+        {
+                return start;
+        }
+        return start;
+	printf("%s : End\n", __func__);
+}
+#include "headers.h"
+#include "declarations.h"
+Node* creatNode(Node *start)
+{
+	printf("%s : Begin\n", __func__);
+	Node *new_node;
+        Node *current;
+        new_node = (Node*)malloc(sizeof(Node));
+        if (!new_node)
+        {
+                perror("malloc");
+                exit(EXIT_FAILURE);
+        }
+        new_node->next = NULL;
+        printf("%s : Enter the value\n", __func__);
+        scanf("%d", &new_node->data);
+        if(!start)
+        {
+                start = new_node;
+        }
+        else
+        {
+                current = start;
+                while(current->next)
+                {
+                        current = current->next;
+                }
+                current->next = new_node;
+        }
+	printf("%s : End\n", __func__);
+        return start;
+}
+#include "headers.h"
+#include "declarations.h"
+
+void display(Node *start)
+{
+	printf("%s : Begin\n", __func__);
+	 int i = 1;
+        Node *dsp = start;
+        printf("%s : Begin\n", __func__);
+        while(dsp->next != NULL)
+        {
+                dsp = dsp->next;
+                printf("%2d : %3d\n", i, dsp->data);
+                i++;
+        }
+	printf("%s : End\n", __func__);
+}
+#include "headers.h"
+#include "declarations.h"
+
+Node *start;
+Node *start2;
+int choice;
+Node* creatLinkList(Node*);
+Node* (*ctLL)(Node*);
+Node* creatNode(Node *);
+Node* (*ctNd)(Node *);
+void display(Node *);
+void (*dsp)(Node *);
+void merge(Node *, Node *);
+void (*mrg)(Node *, Node *);
+void sortll(Node*);
+void (*stll)(Node*);
+int init()
+{
+	start = NULL;
+	start2 = NULL;
+	choice = '\0';
+	printf("%s : Begin\n", __func__);
+        ctLL = creatLinkList;  // Assign function pointers
+        ctNd = creatNode;
+        dsp = display;
+        mrg = merge;
+	stll = sortll;
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "declarations.h"
+
+int main (void)
+{
+	printf("%s : Begin\n", __func__);
+	init();
+        while(1)
+        {
+        printf("<<---MENU--->>\n");
+        printf("1 : CreatLinkList1\n");
+        printf("2 : CreatNode1\n");
+        printf("3 : Display LinkList1\n");
+        printf("4 : CreatLinkList2\n");
+        printf("5 : CreatNode2\n");
+        printf("6 : Display LinkList2\n");
+        printf("7 : Sort the First LinkList\n");
+        printf("8 : Sort the Second LinkList\n");
+      //  printf("9 : Merge the two LinkList\n");
+        printf("9 : Display the Merged two Sorted LinkList\n");
+        printf("0 : Exit\n");
+        printf("Enter your choice\n");
+        scanf("%d", &choice);
+	if ((choice == 1) && (start == NULL))
+	{
+		start = (*ctLL)(start);
+	}
+	else if(choice == 2)
+	{
+		(*ctNd)(start);
+	}
+	 else if(choice == 3)
+        {
+                (*dsp)(start);
+        }
+        else if ((choice == 4) && (start2 == NULL))
+        {
+                start2 = (*ctLL)(start2);
+        }
+        else if(choice == 5)
+        {
+                (*ctNd)(start2);
+        }
+        else if(choice == 6)
+        {
+                (*dsp)(start2);
+        }
+        else if(choice == 9)
+        {
+                (*mrg)(start, start2);
+        }
+        else if(choice == 7)
+        {
+                (*stll)(start);  //sort
+        }
+        else if(choice == 8)
+        {
+                (*stll)(start2);  //sort
+        }
+       /* else if(choice == 10)
+        {
+                (*dsp)(start);  //sort
+        }*/
+	else if(choice == 0)
+		exit(EXIT_SUCCESS);
+	}
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "declarations.h"
+
+void merge(Node *start, Node *start2)
+{
+	printf("%s : Begin\n", __func__);
+	int i = 1;
+        Node *dsp = start;
+        Node *dsp2 = start2;
+	Node *ms_sort;
+        Node *merge_sort;
+	ms_sort = merge_sort = start;
+        printf("%s : Begin\n", __func__);
+        while(dsp->next)
+        {
+                dsp = dsp->next;
+                merge_sort = merge_sort->next;
+                printf("%2d : %3d\n", i, dsp->data);
+                i++;
+        }
+//	merge_sort->next = dsp2->next;
+        while(dsp2->next)
+        {
+                dsp2 = dsp2->next;
+                merge_sort->next = dsp2;
+		merge_sort = merge_sort->next;
+                printf("%2d : %3d\n", i, dsp2->data);
+                i++;
+        }
+	printf("%s : Merged, now sorting\n", __func__);
+	(*stll)(ms_sort);
+	printf("%s : End\n", __func__);
+}
+#include "headers.h"
+#include "declarations.h"
+
+void sortll(Node* start)
+{
+	Node *sort = start;
+	Node *sort_sl;
+	Node *outer = start->next;
+	printf("%s : Begin\n", __func__);
+	int temp = '\0';
+	printf("sort : %p\n", (void*)sort);
+	sort = sort->next;
+	printf("sort : %p\n", (void*)sort);
+	sort_sl = sort;
+	printf("sort->next : %p\n", (void*)sort->next);
+	sort = sort->next;
+	printf("%s : Sorting begin\n", __func__);
+	while(outer)
+	{
+	while(sort)
+	{
+		if(sort_sl->data > sort->data)
+		{
+			temp = sort_sl->data;
+			sort_sl->data = sort->data;
+			sort->data = temp;
+		}
+		sort_sl = sort;
+		sort = sort->next;
+	}
+	outer = outer->next;
+	}
+	printf("%s : Result after sorting\n", __func__);
+	(*dsp)(start);  //display
+	printf("%s : End\n", __func__);
+}

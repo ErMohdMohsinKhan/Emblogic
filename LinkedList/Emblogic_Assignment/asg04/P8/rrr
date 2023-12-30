@@ -1,0 +1,43 @@
+#include "headers.h"
+#include "declarations.h"
+
+void reverse(Node *start)
+{
+	Node *crr, *prev, *grp;
+	prev = grp = start;
+	crr = start->next;
+	int K = 3;
+	int count = 0;
+	printf("%s : Begin\n", __func__);
+	while(crr)
+	{
+		count++;
+		if(count < K)
+		{
+			crr = crr->next;
+			prev = prev->next;
+		}
+		else if(count == K)
+		{
+			grp = crr;				
+			grp->next = prev;
+			grp = grp->next;
+			grp->next= start;
+			break;
+		}
+//		crr = crr->next;
+	}
+
+	printf("%s : Display\n", __func__);
+	Node *dsp = grp;
+	int i = 1;
+        while(dsp)
+        {
+                printf("%2d : %d\n", i, dsp->data);
+                dsp = dsp->next;
+		sleep(1);
+                i++;
+        }
+
+	printf("%s : End\n", __func__);
+}

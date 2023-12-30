@@ -1,0 +1,633 @@
+typedef struct node
+{
+	struct node *next;
+	int data;
+}Node;
+
+typedef struct node2
+{
+	struct node2 *next;
+	int data2;
+}Node2;
+
+typedef struct nodeM
+{
+	struct nodeM *next;
+	int dataM;
+}NodeM;
+#ifndef NOF
+#define NOF 23 
+#endif
+extern int val;
+int init();
+extern void* mainMenu (void*);
+extern void* exitProg (void*);
+extern void* creatLinkList (void*);
+extern void* creatNode (void*);
+extern void* insertNode (void*);
+extern void* deleteNode (void*);
+extern void* displaylinkList (void*);
+
+extern void* creatLinkList2 (void*);
+extern void* creatNode2 (void*);
+extern void* insertNode2 (void*);
+extern void* deleteNode2 (void*);
+extern void* displaylinkList2 (void*);
+extern void* merge (void*);
+extern void* dspMerge (void*);
+
+extern void* insertMenu (void*);
+extern void* insertNodeBeg (void*);
+extern void* insertNodeEnd (void*);
+extern void* insertNodenP (void*);
+extern void* insertNodekV (void*);
+
+extern void* deleteMenu (void*);
+extern void* deleteNodeBeg (void*);
+extern void* deleteNodeEnd (void*);
+extern void* deleteNodenP (void*);
+extern void* deleteNodekV (void*);
+
+extern void* (*fptr[NOF])(void*);
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* creatLinkList2 (void* arg)
+{
+	Node2 *start;
+	start = (Node2*)arg;
+	printf("%s : Begin\n", __func__);
+	if (start)
+	{
+		printf("%s : %s : LinkedList is already created\n", __FILE__, __func__);
+		return ((void*)start);
+	}
+	else
+	{
+		start = (*fptr[23])((void*)start); //creatNode2
+		//return (void*)start;
+	}
+	printf("%s : End\n", __func__);
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* creatLinkList (void* arg)
+{
+	Node *start = NULL;
+	start = (Node*)arg;
+	printf("%s : Begin\n", __func__);
+	if (start)
+	{
+		printf("%s : %s : LinkedList is already created\n", __FILE__, __func__);
+		return ((void*)start);
+	}
+	else
+		return (*fptr[3])((void*)start); //creatNode
+	printf("%s : End\n", __func__);
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* creatNode2 (void* arg)
+{
+	Node2 *start = NULL;
+	printf("%s : Begin\n", __func__);
+	start = (Node2*)malloc(sizeof(Node2));
+	if (!start)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+	start->next = NULL;
+	printf("%s : Enter the value\n", __func__);
+	scanf("%d", &start->data2);
+	printf("%s : End\n", __func__);
+	return (void*)start;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* creatNode (void* arg)
+{
+	Node *start = NULL;
+	printf("%s : Begin\n", __func__);
+	start = (Node*)malloc(sizeof(Node));
+	if (!start)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+	start->next = NULL;
+	printf("%s : Enter the value\n", __func__);
+	scanf("%d", &start->data);
+	printf("%s : End\n", __func__);
+	return (void*)start;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* deleteMenu (void* arg)
+{
+	int choice;
+	Node *start;
+	start = (Node*)arg;
+	printf("%s : Begin\n", __func__);
+	printf("1 : Delete Node from the Beginning\n");
+        printf("2 : Delete Node from the End\n");
+        printf("3 : Delete Node from the Nth Position\n");
+	printf("4 : Delete Node from the Key Value\n");
+	printf("%s : Enter your choice\n", __func__);
+	scanf("%d", &choice);
+	if ((choice >= 1) && (choice<=4))
+		 (*fptr[choice+12])((void*)arg);  //delete()--
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* deleteNode2 (void* arg)
+{
+	Node2 *start, *beg;
+        start = beg = (Node2*)arg;
+        printf("%s : Begin\n", __func__);
+        beg = start->next;
+        start->next = beg->next;
+        free(beg);
+        printf("%s : End\n", __func__);
+
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* deleteNodeBeg (void* arg)
+{
+	Node *start, *beg;
+	start = beg = (Node*)arg;
+	printf("%s : Begin\n", __func__);
+	beg = start->next;
+	start->next = beg->next;
+	free(beg);
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* deleteNode (void* arg)
+{
+	Node *start;
+	start = (Node*)arg;
+	printf("%s : Begin\n", __func__);
+	if (start->next)
+	{
+		(*fptr[12])(arg); //deleteMenu
+	}
+	else
+		printf("%s : LinkList is already Emptied\n", __func__);
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* deleteNodeEnd (void* arg)
+{
+	Node *start, *sln;
+	start = sln = (Node*)arg;
+	printf("%s : Begin\n", __func__);
+	while(start->next)
+	{
+		sln = start;
+		start = start->next;	
+	}
+	free(start);
+	sln->next = NULL;
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* deleteNodekV (void* arg)
+{
+	Node *start, *kdel;
+	int kval;
+	printf("%s : Begin\n", __func__);
+	printf("%s : Enter the key value\n", __func__);
+	scanf("%d", &kval);
+	start = kdel = (Node*)arg;
+	while(start->next)
+        {
+                kdel = start->next;
+                if(kdel->data == kval)
+                {
+                        start->next = kdel->next;
+                        free(kdel);
+                        return 0;
+                }
+                start = start->next;
+        }
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* deleteNodenP (void* arg)
+{
+	Node *start, *del;
+	int pos, count;
+	count = 0;
+	printf("%s : Begin\n", __func__);
+	printf("%s : Enter the position number to delete\n", __func__);
+	scanf("%d", &pos);
+	start = del = (Node*)arg;
+	while(start->next)
+	{
+		count++;
+		if(count == pos)
+		{
+			del = start->next;
+			start->next = del->next;
+			free(del);
+			return 0;
+		}
+		start = start->next;
+	}
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* displaylinkList2 (void *arg)
+{
+	Node2 *start;
+	start = (Node2*)arg;
+	int i = 1;
+	printf("%s : Begin\n", __func__);
+	while(start->next)
+	{
+		start = start->next;
+		printf("%2d : %3d\n", i, start->data2);
+		i++;
+	}
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* displaylinkList (void *arg)
+{
+	Node *start;
+	start = (Node*)arg;
+	int i = 1;
+	printf("%s : Begin\n", __func__);
+	while(start->next)
+	{
+		start = start->next;
+		printf("%2d : %3d\n", i, start->data);
+		i++;
+	}
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* dspMerge (void* arg)
+{
+	NodeM* start;
+	start = (NodeM*)arg;
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+}
+#include "headers.h"
+#include "declarations.h"
+
+void* exitProg (void *arg)
+{
+        printf("%s : %s : Begin\n", __FILE__, __func__);
+        if (strncmp((char*)arg, "failure", 7) == 0)
+        {
+                printf("Abnormally Terminating the Program...\n");
+                exit(EXIT_FAILURE);
+        }
+        else if (strncmp((char*)arg, "success", 7) == 0)
+        {
+                printf("Gracefully Ending the Program...\n");
+                exit(EXIT_SUCCESS);
+        }
+        printf("%s : %s : End\n", __FILE__, __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+int val;
+void* mainMenu (void*);
+void* exitProg (void*);
+void* creatLinkList (void*);
+void* creatNode (void*);
+void* insertNode (void*);
+void* deleteNode (void*);
+void* displaylinkList (void*);
+
+void* insertMenu (void*);
+void* insertNodeBeg (void*);
+void* insertNodeEnd (void*);
+void* insertNodenP (void*);
+void* insertNodekV (void*);
+
+void* deleteMenu (void*);
+void* deleteNodeBeg (void*);
+void* deleteNodeEnd (void*);
+void* deleteNodenP (void*);
+void* deleteNodekV (void*);
+
+void* creatLinkList2 (void*);
+void* creatNode2 (void*);
+void* insertNode2 (void*);
+void* deleteNode2 (void*);
+void* displaylinkList2 (void*);
+void* merge(void*);
+void* dspMerge(void*);
+
+void* (*fptr[NOF])(void*);
+
+int init()
+{
+	printf("%s : Begin\n", __func__);
+	val = 100;
+	fptr[0] = exitProg;
+	fptr[1] = mainMenu;
+	fptr[2] = creatLinkList;
+	fptr[3] = creatNode;
+	fptr[4] = insertNode;
+	fptr[5] = deleteNode;
+	fptr[6] = displaylinkList;
+
+	fptr[7] = insertMenu;
+	fptr[8] = insertNodeBeg;
+	fptr[9] = insertNodeEnd;
+	fptr[10] = insertNodenP;
+	fptr[11] = insertNodekV;
+
+	fptr[12] = deleteMenu;
+	fptr[13] = deleteNodeBeg;
+	fptr[14] = deleteNodeEnd;
+	fptr[15] = deleteNodenP;
+	fptr[16] = deleteNodekV;
+
+	fptr[17] = creatLinkList2;
+        fptr[18] = insertNode2;
+        fptr[19] = deleteNode2;
+        fptr[20] = displaylinkList2;
+	fptr[21] = merge;
+	fptr[22] = dspMerge;
+        fptr[23] = creatNode2;
+	printf("%s : Begin\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* insertMenu (void* arg)
+{
+	int choice;
+	Node *start;
+	start = (Node*)arg;
+	printf("%s : Begin\n", __func__);
+	printf("1 : Insert Node at the Beginning\n");
+        printf("2 : Insert Node at the End\n");
+        printf("3 : Insert Node at the Nth Position\n");
+	printf("4 : Insert Node at the Key Value\n");
+	printf("%s : Enter your choice\n", __func__);
+	scanf("%d", &choice);
+	if ((choice >= 1) && (choice<=4))
+		 (*fptr[choice+7])((void*)arg);  //CreatlinkList
+	/*else if (choice == 0)
+		(*fptr[choice])((void*)"success");
+	else if ((start) && ((choice>=2) && (choice<=4)))
+			arg = (Node*)(*fptr[choice+2])((void*)arg);  */
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* insertNode2 (void* arg)
+{
+	Node2 *strt, *new;
+	printf("%s : Begin\n", __func__);
+	new = (Node2*)(*fptr[23])(arg); //CreatNode2
+	strt = (Node2*)arg;
+	new->next = strt->next;
+	strt->next = new;
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* insertNodeBeg (void* arg)
+{
+	Node *strt, *new;
+	printf("%s : Begin\n", __func__);
+	new = (Node*)(*fptr[3])(arg); //CreatNode
+	strt = (Node*)arg;
+	new->next = strt->next;
+	strt->next = new;
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* insertNode (void* arg)
+{
+	printf("%s : Begin\n", __func__);
+	(*fptr[7])(arg); //insertmenu
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* insertNodeEnd (void* arg)
+{
+	Node *strt, *new;
+	printf("%s : Begin\n", __func__);
+	strt = (Node*)arg;
+	while(strt->next)
+	{
+		strt = strt->next;
+	}
+	new = (Node*)(*fptr[3])(arg); //CreatNode
+	strt->next = new;
+	new->next = NULL;
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* insertNodekV (void* arg)
+{
+	Node *start, *new;
+	start = (Node*)arg;
+	int kval;
+	printf("%s : Begin\n", __func__);
+	printf("%s : Enter key Value\n", __func__);
+	scanf("%d", &kval);
+	while(start->next)
+	{
+		start = start->next;
+		if(start->data == kval)
+		{
+			new = (Node*)(*fptr[3])(arg); //CreatNode
+			new->next = start->next;
+			start->next = new;
+			return 0;
+		}
+	}
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* insertNodenP (void* arg)
+{
+	Node *str, *new;
+	int pos, count;
+	count = 0;
+	printf("%s : Begin\n", __func__);
+	printf("%s : %s : Enter the Position to insert a Node\n", __FILE__, __func__);
+	scanf("%d", &pos);
+	str = (Node*)arg;
+	while(str->next)
+	{
+		str = str->next;
+		count++;
+		if(pos == count)
+		{
+			new = (Node*)(*fptr[3])(arg); //CreatNode
+			new->next = str->next;
+			str->next = new;
+			return 0;
+		}
+	}
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int main (void)
+{
+	init();
+	Node *start = NULL;
+	printf("%s : Begin\n", __func__);
+	while(1)
+		start = (*fptr[1])((void*)start);	
+	printf("%s : End\n", __func__);
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* mainMenu (void* arg)
+{
+	int choice;
+	Node *start;
+	start = (Node*)arg;
+	printf("%s : Begin\n", __func__);
+	if(!start)
+		printf("1 : Create Link List\n");
+	else
+	{
+		printf("2 : Insert Node\n");
+                printf("3 : Delete Node\n");
+                printf("4 : Display Link List\n");
+                printf("5 : Create another Link List\n");
+		printf("6 : Insert Node in LL2\n");
+                printf("7 : Delete Node in LL2\n");
+                printf("8 : Display Link List2\n");
+                printf("9 : Merge Link List\n");
+	}
+	printf("0 : Exit Program\n");
+	printf("%s : Enter your choice\n", __func__);
+	scanf("%d", &choice);
+	if ((!start) && (choice == 1))
+		return (*fptr[choice+1])((void*)arg);  //CreatlinkList
+	else if (choice == 0)
+	{
+		/*while(start->next)
+		{
+			sls = start;
+			start = start->next;
+		}
+		while(start != NULL)
+		{
+			free(start);
+			start = sls;
+		}*/
+		start = (Node*)arg;
+		//free(start);
+		(*fptr[choice])((void*)"success");
+	}
+	else if ((start) && ((choice>=2) && (choice<=4)))
+			arg = (Node*)(*fptr[choice+2])((void*)arg);
+	else if (choice==5)
+	{
+		Node2* start2 = NULL;
+		(*fptr[choice+12])(start2);
+	}
+	else if ((start) && ((choice>=6) && (choice<=9)))
+	{
+			arg = (Node*)(*fptr[choice+12])((void*)arg);
+	}
+	printf("%s : End\n", __func__);
+	return (void*)arg;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* merge (void* arg)
+{
+	NodeM* start;
+	start = (NodeM*)arg;
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+}

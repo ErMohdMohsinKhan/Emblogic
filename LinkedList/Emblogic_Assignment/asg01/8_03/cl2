@@ -1,0 +1,21 @@
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* creatLinkList2 (void* arg)
+{
+	Node2 *start;
+	start = (Node2*)arg;
+	printf("%s : Begin\n", __func__);
+	if (start)
+	{
+		printf("%s : %s : LinkedList is already created\n", __FILE__, __func__);
+		return ((void*)start);
+	}
+	else
+	{
+		start = (*fptr[23])((void*)start); //creatNode2
+		//return (void*)start;
+	}
+	printf("%s : End\n", __func__);
+}
