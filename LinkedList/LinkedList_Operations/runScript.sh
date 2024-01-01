@@ -2,7 +2,7 @@
 
 `make clean`
 
-if(make)
+if (make)
 then
 echo "Code is build successfully"
 echo "To execute the code, type -> ./sll"

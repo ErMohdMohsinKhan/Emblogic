@@ -1,0 +1,192 @@
+#include "headers.h"
+#include "dataStruct.h"
+#include "declarations.h"
+void* creatQueue(void* arg)
+{
+        printf("%s : Begin\n", __func__);
+	if(!arg)
+	{
+		return (*fptr[2])(arg); //enqueue()
+	}
+	else
+	{
+		printf("%s : Queue is alreay created\n", __func__);
+	}
+        printf("%s : End\n", __func__);
+        return arg;
+}
+#include "headers.h"
+#include "dataStruct.h"
+#include "declarations.h"
+void* dequeue(void* arg)
+{
+	printf("%s : Begin\n", __func__);
+	Node *n = (Node*)arg;
+	Node *prev = n;
+	n = n->next;
+	Queue *q = (Queue*)malloc(sizeof(Queue));;
+	if(!n)
+	{
+		printf("%s : Queue is emptied\n", __func__);
+	}
+	else
+	{
+		while(n->next)
+		{
+			prev=n;
+			n = n->next;
+		}
+		free(n);
+		prev->next = NULL;
+		q->front = prev;
+	}
+	printf("%s : End\n", __func__);
+	return arg;
+}
+#include "headers.h"
+#include "dataStruct.h"
+#include "declarations.h"
+void* display (void* arg)
+{
+	printf("%s : Begin\n", __func__);
+	Node *n = (Node*)arg;
+	n = n->next;
+	while(n)
+	{
+		printf("%s : Value->%2d\n", __func__, n->data);
+		n = n->next;
+	}
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStruct.h"
+#include "declarations.h"
+void* enqueue (void* arg)
+{
+	printf("%s : Begin\n", __func__);
+	Node *n = (Node*)arg;	
+	Node *cons = (Node*)arg;	
+	int val;
+	if(!n)
+	{
+		n = (Node*)malloc(sizeof(Node));
+		if(!n)
+		{
+			perror("malloc");
+			exit(1);
+		}
+		printf("%s : Memory allocated for Node\n", __func__);
+		Queue *q = (Queue*)malloc(sizeof(Queue));
+		if(!q)
+		{
+			perror("malloc");
+			exit(1);
+		}
+		printf("%s : Memory allocated for Queue\n", __func__);
+		q->front  = q->rear = NULL;
+		n->next = NULL;
+		n->data = -99;
+		return (void*)n;
+	}
+	else
+	{
+		printf("%s : Going in else part\n", __func__);
+	        Node *new = NULL;
+                new = (Node*)malloc(sizeof(Node));
+                if(!new)
+                {
+                        perror("malloc");
+                        exit(1);
+                }
+		printf("%s : Enter value\n", __func__);
+		scanf("%d", &new->data);
+		new->next = NULL;
+		n->next = new;
+		printf("Value\n");
+//		printf("rear -> %p\n", q->rear);
+//		printf("new -> %p\n", (void*)new);
+		Queue *q = (Queue*)malloc(sizeof(Queue));
+		q->rear = new;
+//		q->rear->next = NULL;
+	}
+	printf("%s : End\n", __func__);
+	return (void*)cons;
+}
+#include "headers.h"
+#include "dataStruct.h"
+#include "declarations.h"
+
+void* mainMenu(void*);
+void* creatQueue(void*);
+void* enqueue(void*);
+void* dequeue(void*);
+void* display(void*);
+void* (*fptr[NOF])(void*);
+int init()
+{
+        //printf("%s : Begin\n", __func__);
+        fptr[0] = mainMenu;
+        fptr[1] = creatQueue;
+        fptr[2] = enqueue;
+        fptr[3] = dequeue;
+        fptr[4] = display;
+        //printf("%s : End\n", __func__);
+        return 0;
+}
+#include "headers.h"
+#include "dataStruct.h"
+#include "declarations.h"
+int main ()
+{
+	printf("%s : Begin\n", __func__);
+	init();
+	Node* n = NULL;
+	while(1)
+	{
+		n = (*fptr[0])(n); //mainMenu()
+	}
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStruct.h"
+#include "declarations.h"
+void* mainMenu (void* arg)
+{
+	printf("%s : Begin\n", __func__);
+	int choice;
+	if(!arg)
+        {
+                printf("%s : 1 : Create a Linear Queue\n", __func__);
+        }
+        else
+        {
+                printf("%s : 2 : Insert an element in the Linear Queue\n", __func__);
+                printf("%s : 3 : Remove an element in the Linear Queue\n", __func__);
+                printf("%s : 4 : Display the Linear Queue\n", __func__);
+        }
+        printf("%s : 0 : Exit the Program\n", __func__);
+        scanf("%d", &choice);
+        if( (choice == 1) && arg == NULL )
+        {
+                return (*fptr[choice])(arg);
+        }
+        else if( choice == 2 )
+        {
+                (*fptr[choice])((void*)arg);  //enque()
+        }
+        else if( choice == 3 )
+        {
+                (*fptr[choice])((void*)(arg));  //deque()
+        }
+        else if( choice == 4 )
+        {
+                (*fptr[choice])((void*)(arg)); //display()
+        }
+        else if( choice == 0 )
+                exit(EXIT_SUCCESS);
+
+	printf("%s : End\n", __func__);
+	return arg;
+}
