@@ -1,0 +1,34 @@
+#include "headers.h"
+#include "dataStruct.h"
+#include "declarations.h"
+void* dequeue(void *arg)
+{
+	printf("%s : Begin\n", __func__);
+	PQueue *ppq = (PQueue *)arg;
+	Item *pcit = ppq->pfrst;
+	Item *ppit = NULL;
+	 if (!ppq)
+    	{
+        	printf("%s : Priority queue is not found\n", __func__);
+    	}
+    	else
+	{
+		if(!pcit->pnext)
+		{
+			printf("%s : %s : Element to be dequed : %d->%3d\n", __FILE__, __func__, pcit->pdata->priority, pcit->pdata->value);
+			printf("%s : %s : Now, Queue is emptied\n", __FILE__, __func__);
+			return 0;
+		}
+		while(pcit->pnext)
+		{
+			ppit = pcit;
+			pcit = pcit->pnext;
+		}
+		printf("%s : %s : Element to be dequed : %d->%3d\n", __FILE__, __func__, pcit->pdata->priority, pcit->pdata->value);
+		free(pcit->pdata);
+		free(pcit);
+		ppit->pnext = NULL;
+	}	
+	printf("%s : End\n", __func__);
+	return arg;
+}

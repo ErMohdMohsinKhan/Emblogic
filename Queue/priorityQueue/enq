@@ -1,0 +1,87 @@
+#include "headers.h"
+#include "dataStruct.h"
+#include "declarations.h"
+void* enqueue(void *arg)
+{
+	printf("%s : Begin\n", __func__);
+	PQueue *ppq = (PQueue *)arg;
+	Data *pds = NULL;
+	Item *pit = NULL;
+	Item *pcit = NULL;
+	Item *psl = NULL;
+	if(!ppq)
+	{
+		printf("%s : Priority queue is not found\n", __func__);
+	}
+	else
+	{
+		pds = (Data*)malloc(sizeof(Data));
+		if(!pds)
+		{
+			perror("malloc");
+			(*fptr[0])((void*)"failure");
+		}
+		printf("%s : Enter data and priority\n", __func__);
+		scanf("%d%d", &pds->value, &pds->priority);
+		pit = (Item*)malloc(sizeof(Item));
+		if(!pit)
+		{
+			perror("malloc");
+			free(pds);
+                        (*fptr[0])((void*)"failure");
+		}
+		pit->pnext = NULL;
+		pit->pdata = pds;
+		if(!ppq->pfrst)
+		{
+			ppq->pfrst = pit;
+			return arg;
+		}
+		psl = pcit = ppq->pfrst; //Putting current and sl to first
+		do
+		{
+			if(pit->pdata->priority < pcit->pdata->priority) //&& pit->pdata->priority > pcit->pnext->pdata->priority)
+			{
+				pit->pnext = ppq->pfrst;
+				ppq->pfrst = pit;
+			//	pit->pnext = pcit;
+				//psl = pcit;
+				//pcit = pcit->pnext;
+				break;
+			}
+			else if(pit->pdata->priority > pcit->pdata->priority)// && pit->pdata->priority < pcit->pnext->pdata->priority)
+			{
+				pcit->pnext = pit;
+				//psl = pcit;
+				printf("%s : pcit : %p\tpcit->pnext : %p\n", __func__, pcit, pcit->pnext);
+			//	pcit = pcit->pnext;
+				break;
+			}
+		/*	else
+			{
+				psl = pcit;
+			//	pcit = pcit->pnext;
+			}*/
+
+    			// Move to the next item in the linked list
+    			psl = pcit;
+    			pcit = pcit->pnext;
+
+			/*if(pcit->pnext)
+			{
+				printf("%s : Inside If1 : pcit : %p pcit->next : %p\n", __func__, pcit, pcit->pnext);
+				psl = pcit;
+				pcit = pcit->pnext;
+				printf("%s : Inside If2 : pcit : %p pcit->next : %p\n", __func__, pcit, pcit->pnext);
+			}*/
+		}while(pcit->pnext);
+	}
+	// If pcit is NULL, we reached the end of the list, so insert at the end
+/*	if (!pcit)
+	{
+    	psl->pnext = pit;
+    	pit->pnext = NULL;
+	}
+*/	printf("%s : End\n", __func__);
+	return arg;
+}
