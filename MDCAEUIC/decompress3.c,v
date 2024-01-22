@@ -1,0 +1,406 @@
+head	1.9;
+access;
+symbols;
+locks
+	root:1.9; strict;
+comment	@ * @;
+
+
+1.9
+date	2024.01.05.17.58.13;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2024.01.05.17.44.14;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2024.01.05.17.43.08;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2023.12.16.15.26.44;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2023.12.16.15.18.51;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2023.12.16.15.17.34;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2023.12.16.15.13.32;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2023.12.10.18.09.22;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.11.18.05.52.28;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@creating function
+@
+
+
+1.9
+log
+@Implemented 3 bit decompression
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+void* decompress3(void* arg)
+{
+    DSCompress *dco;
+    DSUnique dun;
+    int ret, i, size, cfd;
+    unsigned char byt, ch, cc;
+    printf("%s : Begin\n",__func__);
+    dco = (DSCompress*)arg;
+    size = lseek(dco->fd, 0, SEEK_END)-1;
+    lseek(dco->fd, 0, SEEK_SET);
+    printf("%s : Please give a name to the Decompressed File\n", __func__);
+    cfd = *(int*)(*fptr[2])((void*)"creat"); // Open file
+    while(1)
+    {
+        ret = read(dco->fd, &byt, 1);
+        if (ret == -1)
+        {
+            perror("read");
+            (*fptr[1])((void*)"failure");
+        }
+
+        // First part
+        ch = byt;
+        cc = (ch >> 5) & 0x07;
+        dun.ma = dco->ma;
+        dun.ch = (char)cc;
+        *(int*)(*fptr[21])((void*)&dun);  // addToMap
+
+        if (size == 0)
+            goto LA;
+
+        // Second part
+        byt ^= byt;
+        ret = read(dco->fd, &byt, 1);
+        if (ret == -1)
+        {
+            perror("read");
+            (*fptr[1])((void*)"failure");
+        }
+
+        ch = byt;
+        cc = (ch >> 7) & 0x01;
+        dun.ma = dco->ma;
+        dun.ch = (char)cc;
+        *(int*)(*fptr[21])((void*)&dun);  // addToMap
+
+        cc = (ch >> 1) & 0x07;
+        dun.ma = dco->ma;
+        dun.ch = (char)cc;
+        *(int*)(*fptr[21])((void*)&dun);  // addToMap
+
+        if (size == 0)
+            goto LA;
+
+        // Third part
+        byt ^= byt;
+        ret = read(dco->fd, &byt, 1);
+        if (ret == -1)
+        {
+            perror("read");
+            (*fptr[1])((void*)"failure");
+        }
+
+        ch = byt;
+        cc = (ch >> 6) & 0x03;
+        dun.ma = dco->ma;
+        dun.ch = (char)cc;
+        *(int*)(*fptr[21])((void*)&dun);  // addToMap
+
+        cc = (ch >> 2) & 0x07;
+        dun.ma = dco->ma;
+        dun.ch = (char)cc;
+        *(int*)(*fptr[21])((void*)&dun);  // addToMap
+
+        cc = (ch >> 5) & 0x07;
+        dun.ma = dco->ma;
+        dun.ch = (char)cc;
+        *(int*)(*fptr[21])((void*)&dun);  // addToMap
+
+LA:     if (size == 0)
+            break;
+    }
+    close(cfd);
+    printf("%s : End\n",__func__);
+    return 0;
+}
+
+@
+
+
+1.8
+log
+@Commenting
+@
+text
+@d5 9
+a13 6
+void* decompress3(void* arg) {
+    printf("%s: Begin\n", __func__);
+/*	unsigned char byt; // Declare byt before the while loop
+
+    DSCompress* dco = (DSCompress*) arg;
+    int size = lseek(dco->fd, 0, SEEK_END); // Get file size (not -1)
+d15 10
+d26 18
+a43 4
+    // Prompt and store user input for output filename
+    char filename[256];
+    printf("%s: Please enter a filename to store the decompressed data: ", __func__);
+	  int fd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+d45 22
+d68 15
+a82 7
+    // Open output file for writing
+     fd = open(filename, O_WRONLY | O_CREAT, 0644);
+    if (fd == -1) {
+        perror("open");
+        printf("%s: Error opening output file: %s\n", __func__, filename);
+        return NULL;
+    }
+d84 2
+a85 50
+    // Initialize variables for dictionary and frequency analysis
+    DSUnique dun;
+    int dict[8]; // Holds 8 most frequent symbols
+    int freq[256]; // Stores frequency of each symbol (ASCII range)
+    memset(dict, 0, sizeof(dict));
+    memset(freq, 0, sizeof(freq));
+
+    while (read(dco->fd, &byt, 1) > 0) {
+        for (int i = 7; i >= 0; i--) { // Extract each 3-bit code from the byte
+            int code = (byt >> i) & 0x7;
+
+            // Check if code is in dictionary
+            if (code < 8) {
+                dun.ch = dict[code]; // Replace code with dictionary symbol
+                if (dun.ch != 0) {
+                    freq[dun.ch]++; // Update frequency for dictionary entries
+                    if (write(fd, &dun.ch, 1) == -1) {
+                        perror("write");
+                        close(fd);
+                        printf("%s: Error writing to output file: %s\n", __func__, filename);
+                        return NULL;
+                    }
+                }
+            } else { // Handle non-dictionary symbols
+                if (code < 24) { // Temporary code based on context (0-23)
+                    dun.ch = freq[code]; // Decode based on symbol frequency ranking
+                    if (dun.ch != 0) {
+                        freq[dun.ch]++; // Update frequency and potentially update dictionary
+                        if (freq[dun.ch] > freq[dict[7]]) {
+                            dict[7] = dun.ch; // Update dictionary if frequency higher than least frequent entry
+                        }
+                        if (write(fd, &dun.ch, 1) == -1) {
+                            perror("write");
+                            close(fd);
+                            printf("%s: Error writing to output file: %s\n", __func__, filename);
+                            return NULL;
+                        }
+                    }
+                } else { // High frequency symbols use shifted ASCII
+                    dun.ch = (byt << 3) | (code >> 3);
+                    freq[dun.ch]++; // Update frequency for high-frequency symbols
+                    if (write(fd, &dun.ch, 1) == -1) {
+                        perror("write");
+                        close(fd);
+                        printf("%s: Error writing to output file: %s\n", __func__, filename);
+                        return NULL;
+                    }
+                }
+            }
+        }
+d87 2
+a88 5
+
+    close(fd); // Close output file
+
+    printf("%s: Decompressed data written to %s\n", __func__, filename);
+ */   printf("%s: End\n", __func__);
+d91 1
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+	unsigned char byt; // Declare byt before the while loop
+d82 1
+a82 1
+    printf("%s: End\n", __func__);
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d18 1
+a18 1
+/*
+d20 1
+a20 1
+    int fd = open(filename, O_WRONLY | O_CREAT, 0644);
+d26 1
+a26 1
+*/
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d16 1
+a16 2
+    fgets(filename, sizeof(filename), stdin);
+    strtok(filename, "\n"); // Remove newline character
+d18 1
+d26 1
+a26 1
+
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d7 1
+@
+
+
+1.3
+log
+@Decompression updated
+@
+text
+@d11 14
+a24 1
+    unsigned char byt;
+a39 1
+                // Update frequency for dictionary entries
+d41 7
+a47 1
+                    freq[dun.ch]++;
+d53 1
+a53 2
+                        // Update frequency and potentially update dictionary
+                        freq[dun.ch]++;
+d57 6
+d67 6
+a74 3
+
+            // Print the decompressed character
+            printf("%c", dun.ch);
+d78 4
+a81 1
+    printf("\n%s: End\n", __func__);
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d4 50
+a53 50
+void* decompress3 (void *arg)
+{
+	int noc, ret, i, dfd;
+	unsigned char c, dc;
+	DSUnique dun;
+	printf("%s : Begin\n", __func__);
+	DSCompress *dco;
+	dco = (DSCompress*)arg;
+	dun.noc = lseek(dco->fd, 0, SEEK_END)-1;
+	lseek(dco->fd, 0, SEEK_SET);
+	printf("%s : Name the Decompressed File\n", __func__);
+	dfd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+	while(1)
+	{
+		ret = read(dco->fd, &dun.ch, 1);
+		if (ret == -1)
+		{
+			perror("read");
+			(*fptr[1])((void*)"failure");
+		}
+		dun.noc--;
+		c = dun.ch; // Read byte
+		c >>= 6; // Shift right by 6, instead of 4
+		i = (unsigned int)c; // Convert to int
+		dc = dco->ma[i]; // Get character from master array
+		printf("dc : %c\n", dc);
+		ret = write(dfd, &dc, 1); // Write decompressed character
+		if (ret == -1)
+		{
+			perror("write");
+			(*fptr[1])((void*)"failure");
+		}
+		c = dun.ch;
+		c <<= 3; // Shift left by 3, instead of 4
+		c >>= 3; // Shift right by 3, isolate 3 lower bits
+		i = (unsigned int)c;
+		dc = dco->ma[i];
+		printf("dc : %c\n", dc);
+		ret = write(dfd, &dc, 1);
+		if (ret == -1)
+		{
+			perror("write");
+			(*fptr[1])((void*)"failure");
+		}
+		if (dun.noc <= 0)
+			break;
+	}
+	close(dfd);
+	printf("%s : End\n", __func__);
+	return 0;
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d6 47
+a52 2
+	printf("%s : Begin\n",__func__);
+	printf("%s : End\n",__func__);
+@

@@ -1,0 +1,67 @@
+head	1.3;
+access;
+symbols;
+locks
+	root:1.3; strict;
+comment	@ * @;
+
+
+1.3
+date	2023.08.08.08.26.12;	author mohsin;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2023.08.08.07.54.11;	author mohsin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.07.14.11.58.27;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@This function would comprees file of code length 5
+@
+
+
+1.3
+log
+@Replacing void with void*
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+void* compress5 (void* arg)
+{
+	printf("%s : Begin\n",__func__);
+	printf("%s : End\n",__func__);
+	return 0;
+}
+@
+
+
+1.2
+log
+@Added datastructures.h header file
+@
+text
+@d4 1
+a4 1
+void compress5 (void* arg)
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+d4 1
+a4 1
+int compress5 (int fd, char* ma)
+@

@@ -1,0 +1,204 @@
+head	1.5;
+access;
+symbols;
+locks
+	root:1.5; strict;
+comment	@ * @;
+
+
+1.5
+date	2023.11.18.05.53.21;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2023.08.08.08.11.24;	author mohsin;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2023.08.08.08.09.40;	author mohsin;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2023.08.08.07.55.58;	author mohsin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.07.14.12.46.54;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@Declared all functions and function pointers in global space and then
+initialized all function pointers
+@
+
+
+1.5
+log
+@updating newly created functions
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int var;
+void* mainMenu(void*);
+void* exitProg(void*);
+void* openFile(void*);
+void* createMasterArray(void*);
+void* unique(void*);
+void* codelength(void*);
+void* compStats(void*);
+void* compressFile(void*);
+void* decompressFile (void*);
+void* decompStats(void*);
+void* compress2(void*);
+void* compress3(void*);
+void* compress4(void*);
+void* compress5(void*);
+void* compress6(void*);
+void* compress7(void*);
+void* decompress2(void*);
+void* decompress3(void*);
+void* decompress4(void*);
+void* decompress5(void*);
+void* decompress6(void*);
+void* decompress7(void*);
+void* findIndex(void*);
+void* (*fptr[NOF])(void*);
+int init()
+{
+	printf("%s : Begin\n",__func__);
+
+	var = 0;
+	fptr[0] = mainMenu;
+	fptr[1] = exitProg;
+	fptr[2] = openFile;
+	fptr[3] = createMasterArray;
+	fptr[4] = unique;
+	fptr[5] = codelength;
+	fptr[6] = compressFile;
+	fptr[7] = compStats;
+	fptr[8] = decompressFile;
+	fptr[9] = decompStats;
+	fptr[10] = compress2;
+	fptr[11] = compress3;
+	fptr[12] = compress4;
+	fptr[13] = compress5;
+	fptr[14] = compress6;
+	fptr[15] = compress7;
+	fptr[16] = decompress2;
+	fptr[17] = decompress3;
+	fptr[18] = decompress4;
+	fptr[19] = decompress5;
+	fptr[20] = decompress6;
+	fptr[21] = decompress7;
+	fptr[22] = findIndex;
+
+        printf("%s : End\n",__func__);
+        return 0;
+}
+@
+
+
+1.4
+log
+@typo
+@
+text
+@d22 6
+d51 7
+a57 1
+	fptr[16] = findIndex;
+@
+
+
+1.3
+log
+@typo
+@
+text
+@d36 1
+a36 1
+	fptr[7] = compStatsFile;
+@
+
+
+1.2
+log
+@Added datastructures.h header file
+@
+text
+@d35 1
+a35 1
+	fptr[6] = compressFile
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+d5 19
+a23 34
+int mainMenu();
+int (*mame)();
+int exitProg(char*);
+int (*expr)(char*);
+int openFile(char*);
+int (*opfi)(char*);
+char* createMasterArray(int);
+char* (*crma)(int);
+int unique(char*, int, char);
+int (*uniq)(char*, int, char);
+int codelength(char*);
+int (*cole) (char*);
+int compStats();
+int (*cost)();
+int compressFile();
+int (*copf)();
+int decompressFile ();
+int (*dcof)();
+int decompStats();
+int (*dcst)();
+int compress2(int, char*);
+int (*cmp2)(int, char*);
+int compress3(int, char*);
+int (*cmp3)(int, char*);
+int compress4(int, char*);
+int (*cmp4)(int, char*);
+int compress5(int, char*);
+int (*cmp5)(int, char*);
+int compress6(int, char*);
+int (*cmp6)(int, char*);
+int compress7(int, char*);
+int (*cmp7)(int, char*);
+
+
+d28 18
+a45 16
+	mame = mainMenu;
+	expr = exitProg;
+	opfi = openFile;
+	crma = createMasterArray;
+	uniq = unique;
+	cole = codelength;
+	cost = compStats;
+	copf = compressFile;
+	dcof = decompressFile;
+	dcst = decompStats;
+	cmp2 = compress2;
+	cmp3 = compress3;
+	cmp4 = compress4;
+	cmp5 = compress5;
+	cmp6 = compress6;
+	cmp7 = compress7;
+@

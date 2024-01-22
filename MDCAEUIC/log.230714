@@ -1,0 +1,446 @@
+
+RCS file: declarations.h,v
+Working file: declarations.h
+head: 1.8
+branch:
+locks: strict
+	mohsin: 1.8
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 8;	selected revisions: 8
+description:
+This file contains declarations for all the function prototypes used including mainMenu(), openFile(), and compressFile()
+----------------------------
+revision 1.8	locked by: mohsin;
+date: 2023/07/14 12:52:48;  author: mohsin;  state: Exp;  lines: +1 -0
+Declaring function prototype for init().
+----------------------------
+revision 1.7
+date: 2023/07/14 12:50:28;  author: mohsin;  state: Exp;  lines: +2 -2
+typo
+----------------------------
+revision 1.6
+date: 2023/07/14 12:45:21;  author: mohsin;  state: Exp;  lines: +32 -16
+Converted the whole program into function pointers
+Declared function pointer for every function as extern
+----------------------------
+revision 1.5
+date: 2023/07/14 11:55:23;  author: mohsin;  state: Exp;  lines: +6 -0
+Declared all the compression functions which takes int fd and char* ma as input
+----------------------------
+revision 1.4
+date: 2023/07/13 18:06:19;  author: mohsin;  state: Exp;  lines: +1 -1
+Declared codelength() which takes master array as char* as input
+----------------------------
+revision 1.3
+date: 2023/07/12 15:42:12;  author: mohsin;  state: Exp;  lines: +1 -1
+Declared unique () which takes 3 inputs as an argument i.e., char master_array, noc read so far, chracter to be checked whether it is unique or not
+----------------------------
+revision 1.2
+date: 2023/07/12 06:15:42;  author: mohsin;  state: Exp;  lines: +1 -1
+Function decompressStats() is not ended with ';'
+----------------------------
+revision 1.1
+date: 2023/07/11 18:54:48;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: headers.h,v
+Working file: headers.h
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+This includes all the headers file
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:06:57;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: codelength.c,v
+Working file: codelength.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+This function determines the codelength depending upon the length of ma
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/13 18:06:45;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: compress2.c,v
+Working file: compress2.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+This function would comprees file of code length 2 , just creating file
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/14 11:55:57;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: compress3.c,v
+Working file: compress3.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+This function would comprees file of code length 3
+Just creating file
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/14 11:57:57;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: compress4.c,v
+Working file: compress4.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+This function would comprees file of code length 4
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/14 11:58:22;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: compress5.c,v
+Working file: compress5.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+This function would comprees file of code length 5
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/14 11:58:27;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: compress6.c,v
+Working file: compress6.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+This function would comprees file of code length 6
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/14 11:58:32;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: compress7.c,v
+Working file: compress7.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+This function would comprees file of code length 7.
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/14 11:58:35;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: compressFile.c,v
+Working file: compressFile.c
+head: 1.6
+branch:
+locks: strict
+	mohsin: 1.6
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 6;	selected revisions: 6
+description:
+Prompt the user to enter a filename to be compressed. Then moves the control to openFile() by calling it and also create char* to masterarray
+----------------------------
+revision 1.6	locked by: mohsin;
+date: 2023/07/14 12:46:20;  author: mohsin;  state: Exp;  lines: +9 -9
+Callinh all the compression gunctions by function pointers()
+----------------------------
+revision 1.5
+date: 2023/07/14 11:58:39;  author: mohsin;  state: Exp;  lines: +22 -0
+Using sitch case, depending on code length, calling appropriate compression function
+----------------------------
+revision 1.4
+date: 2023/07/13 18:08:18;  author: mohsin;  state: Exp;  lines: +1 -1
+typo
+----------------------------
+revision 1.3
+date: 2023/07/13 18:07:12;  author: mohsin;  state: Exp;  lines: +2 -0
+Printing codelength
+----------------------------
+revision 1.2
+date: 2023/07/12 15:28:40;  author: mohsin;  state: Exp;  lines: +1 -1
+Just printing master array elemnts in comprssion file
+----------------------------
+revision 1.1
+date: 2023/07/11 18:56:51;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: compStats.c,v
+Working file: compStats.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Just printining begin and end
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 18:58:43;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: createMasterArray.c,v
+Working file: createMasterArray.c
+head: 1.7
+branch:
+locks: strict
+	mohsin: 1.7
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 7;	selected revisions: 7
+description:
+Using LSEEK() to print the total numbers of character
+including EOF character (which will be removed in next version)
+----------------------------
+revision 1.7	locked by: mohsin;
+date: 2023/07/12 15:52:20;  author: mohsin;  state: Exp;  lines: +1 -1
+Correcting error in printing total number of unique characters
+----------------------------
+revision 1.6
+date: 2023/07/12 15:49:35;  author: mohsin;  state: Exp;  lines: +1 -0
+Printing total no of unique characters in file
+----------------------------
+revision 1.5
+date: 2023/07/12 15:43:33;  author: mohsin;  state: Exp;  lines: +8 -5
+Sending charcter by charcter in order to ensure unique charcters are read to unique()
+Once, all the charcters are read returns ONLY unique string to calling function compression()
+----------------------------
+revision 1.4
+date: 2023/07/12 15:25:15;  author: mohsin;  state: Exp;  lines: +4 -4
+Just correcting declarations in file
+----------------------------
+revision 1.3
+date: 2023/07/12 15:20:55;  author: mohsin;  state: Exp;  lines: +32 -2
+Reading character by character fom the file and at the same reallocating memory after reading each character again and again using realloc().
+Once, all the characters are read, filled last chgarcter as \0 to indicate end of string to system
+----------------------------
+revision 1.2
+date: 2023/07/12 06:16:12;  author: mohsin;  state: Exp;  lines: +1 -1
+The EOF character is removed from the count by subtracting 1 from LSEEK
+----------------------------
+revision 1.1
+date: 2023/07/11 18:59:13;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: decompressFile.c,v
+Working file: decompressFile.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Just printining begin and end of function
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:00:11;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: decompStats.c,v
+Working file: decompStats.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Just printining begin and end of function
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:00:27;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: exitProg.c,v
+Working file: exitProg.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Print the Exit status which determines whether program exited gracefully or due to some error
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:00:36;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: init.c,v
+Working file: init.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Declared all functions and function pointers in global space and then
+initialized all function pointers
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/14 12:46:54;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: main.c,v
+Working file: main.c
+head: 1.3
+branch:
+locks: strict
+	mohsin: 1.3
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 3;	selected revisions: 3
+description:
+This is the main file which defines flow of Execution of the Project.
+----------------------------
+revision 1.3	locked by: mohsin;
+date: 2023/07/14 12:50:34;  author: mohsin;  state: Exp;  lines: +1 -1
+typo
+----------------------------
+revision 1.2
+date: 2023/07/14 12:48:06;  author: mohsin;  state: Exp;  lines: +7 -6
+Calling every function using function pointers
+----------------------------
+revision 1.1
+date: 2023/07/11 19:01:25;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: mainMenu.c,v
+Working file: mainMenu.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Prints the Menu before the user to choose it from
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:02:10;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: openFile.c,v
+Working file: openFile.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Takes the name of file from the user to be compressed and depending on the mode presents it (READ, WRITE)
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:03:09;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: unique.c,v
+Working file: unique.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+unique () which takes 3 inputs as an argument
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/12 15:45:33;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================

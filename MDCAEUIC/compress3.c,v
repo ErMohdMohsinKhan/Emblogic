@@ -1,0 +1,387 @@
+head	1.7;
+access;
+symbols;
+locks
+	root:1.7; strict;
+comment	@ * @;
+
+
+1.7
+date	2024.01.05.17.45.48;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2024.01.05.17.42.44;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2023.12.16.14.52.21;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2023.12.10.17.55.59;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2023.12.10.17.52.50;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2023.08.08.07.52.09;	author mohsin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.07.14.11.57.57;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@This function would comprees file of code length 3
+Just creating file
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+void* compress3 (void* arg)
+{
+        DSCompress *dco;
+        DSUnique dun;
+        int ret, i, size, cfd;
+        unsigned char byt, ch, cc;
+        printf("%s : Begin\n",__func__);
+        dco = (DSCompress*)arg;
+        size = lseek(dco->fd, 0, SEEK_END)-1;
+        lseek(dco->fd, 0, SEEK_SET);
+        printf("%s : Please give a name to the Compressed File\n", __func__);
+        cfd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+	while(1)
+        {
+                byt ^= byt;
+                ret = read(dco->fd, &dun.ch, 1);  //h
+                if (ret == -1)
+                {
+                        perror("read");
+                        (*fptr[1])((void*)"failure");
+                }
+                size--;
+                dun.ma = dco->ma;
+                i = *(int*)(*fptr[22])((void*)&dun);    //findIndex
+                ch = cc = (unsigned char)i; //Converting index to char
+		ch <<= 5;
+                byt |= ch;
+                if (size == 0)
+                        goto LA;
+                ret = read(dco->fd, &dun.ch, 1);  //e
+		if (ret == -1)
+                {
+                        perror("read");
+                        (*fptr[1])((char*)"failure");
+                }
+                size--;
+                dun.ma = dco->ma;
+                i = *(int*)(*fptr[22])((void*)&dun);
+                ch = cc = (unsigned char)i;
+                ch <<= 5;
+                ch >>= 3;
+                byt |= ch;
+		if (size == 0)
+                        goto LA;
+		ret = read(dco->fd, &dun.ch, 1);  //\b
+                if (ret == -1)
+                {
+                        perror("read");
+                        (*fptr[1])((char*)"failure");
+                }
+                size--;
+                dun.ma = dco->ma;
+                i = *(int*)(*fptr[22])((void*)&dun);
+                ch = cc = (unsigned char)i;
+		ch <<= 5;
+                ch >>= 6;
+                byt |= ch;
+		//Writing 
+		printf("Byte : %d\n", byt);
+                ret= write (cfd, &byt, 1);
+                if (ret == -1)
+                {
+                        perror("write");
+                        (*fptr[1])((void*)"failure");
+                }
+		//Second part
+		byt ^= byt;
+		ch = cc;
+		ch <<= 7;
+		byt |= ch;
+		if (size == 0)
+                        goto LA;
+		ret = read(dco->fd, &dun.ch, 1);  //t
+                if (ret == -1)
+                {
+                        perror("read");
+                        (*fptr[1])((char*)"failure");
+                }
+                size--;
+                dun.ma = dco->ma;
+                i = *(int*)(*fptr[22])((void*)&dun);
+                ch = cc = (unsigned char)i;
+                ch <<= 5;
+                ch >>= 1;
+                byt |= ch;
+		if (size == 0)
+                        goto LA;
+                ret = read(dco->fd, &dun.ch, 1);  //h
+                if (ret == -1)
+                {
+                        perror("read");
+                        (*fptr[1])((char*)"failure");
+                }
+                size--;
+                dun.ma = dco->ma;
+                i = *(int*)(*fptr[22])((void*)&dun);
+                ch = cc = (unsigned char)i;
+                ch <<= 5;
+                ch >>= 4;
+                byt |= ch;
+		if (size == 0)
+                        goto LA;
+                ret = read(dco->fd, &dun.ch, 1);  //r
+                if (ret == -1)
+                {
+                        perror("read");
+                        (*fptr[1])((char*)"failure");
+                }
+                size--;
+                dun.ma = dco->ma;
+                i = *(int*)(*fptr[22])((void*)&dun);
+                ch = cc = (unsigned char)i;
+                ch <<= 5;
+                ch >>= 7;
+                byt |= ch;
+		//Writing 
+                printf("Byte : %d\n", byt);
+                ret= write (cfd, &byt, 1);
+                if (ret == -1)
+                {
+                        perror("write");
+                        (*fptr[1])((void*)"failure");
+                }
+
+		//Third part
+		 byt ^= byt;
+                ch = cc;
+                ch <<= 6;
+                byt |= ch;
+                if (size == 0)
+                        goto LA;
+                ret = read(dco->fd, &dun.ch, 1);  //e
+                if (ret == -1)
+                {
+                        perror("read");
+                        (*fptr[1])((char*)"failure");
+                }
+                size--;
+                dun.ma = dco->ma;
+                i = *(int*)(*fptr[22])((void*)&dun);
+                ch = cc = (unsigned char)i;
+                ch <<= 5;
+                ch >>= 2;
+                byt |= ch;
+                if (size == 0)
+                        goto LA;
+		ret = read(dco->fd, &dun.ch, 1);  //w
+                if (ret == -1)
+                {
+                        perror("read");
+                        (*fptr[1])((char*)"failure");
+                }
+                size--;
+                dun.ma = dco->ma;
+                i = *(int*)(*fptr[22])((void*)&dun);
+                ch = cc = (unsigned char)i;
+                ch <<= 5;
+                ch >>= 5;
+                byt |= ch;
+		//Writing 
+LA:             printf("Byte : %d\n", byt);
+                ret= write (cfd, &byt, 1);
+                if (ret == -1)
+                {
+                        perror("write");
+                        (*fptr[1])((void*)"failure");
+                }
+		 if (size == 0)
+                        break;
+	}
+	close(cfd);
+        printf("%s : Please give a name of the Encryption key File\n", __func__);
+        cfd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+        write(cfd, dco->ma, strlen(dco->ma));
+        if (ret == -1)
+        {
+               perror("write");
+               (*fptr[0])((void*)"failure");
+        }
+
+        close(cfd);
+
+        printf("%s : End\n",__func__);
+        return 0;
+}
+
+
+
+@
+
+
+1.6
+log
+@Implementing 3-bit compression
+@
+text
+@d4 1
+a4 1
+void* compress4 (void* arg)
+@
+
+
+1.5
+log
+@Updating logic
+@
+text
+@d4 1
+a4 1
+void* compress3 (void* arg)
+d6 10
+a15 11
+	printf("%s : Begin\n",__func__);
+	DSCompress *dco;
+	DSUnique dun;
+	int ret, i, size, cfd;
+	unsigned char byt, ch;
+	printf("%s : Begin\n", __func__);
+	dco = (DSCompress*)arg;
+	size = lseek(dco->fd, 0, SEEK_END)-1;
+	lseek(dco->fd, 0, SEEK_SET);
+	printf("%s : Please give a name to the Compressed File\n", __func__);
+	cfd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+d17 53
+a69 1
+	{
+d71 2
+a72 12
+		ret = read(dco->fd, &dun.ch, 1);
+		if (ret == -1)
+		{
+			perror("read");
+			(*fptr[1])((void*)"failure");
+		}
+		size--;
+		dun.ma = dco->ma;
+		i = *(int*)(*fptr[22])((void*)&dun); //findIndex()
+		ch = (unsigned char)i;
+		ch <<= 4; // Shift left by 4
+		byt &= 0x0F; // This clears the upper 4 bits
+d75 29
+a103 21
+			goto LA;
+		ret = read(dco->fd, &dun.ch, 1);
+		if (ret == -1)
+		{
+			perror("read");
+			(*fptr[1])((char*)"failure");
+		}
+		size--;
+		dun.ma = dco->ma;
+		i = *(int*)(*fptr[22])((void*)&dun);
+		ch = (unsigned char)i; // Converting index to char
+		ch <<= 3; // Shift left by 3, instead of 4
+		ch >>= 3; // Shift right by 3, to isolate 3 lower bits
+		byt |= ch;
+LA:        	printf("Byte : %d\n", byt);
+		ret= write (cfd, &byt, 1);
+		if (ret == -1)
+		{
+			perror("write");
+			(*fptr[1])((void*)"failure");
+		}
+d105 68
+a172 1
+			break;
+d175 8
+a182 8
+	printf("%s : Please give a name of the Encryption key File\n", __func__);
+	cfd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+	write(cfd, dco->ma, strlen(dco->ma));
+	if (ret == -1)
+	{
+		perror("write");
+		(*fptr[0])((void*)"failure");
+	}
+d184 1
+a184 1
+	close(cfd);
+d186 2
+a187 2
+	printf("%s : End\n",__func__);
+	return 0;
+d189 3
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d30 2
+a31 1
+		ch <<= 6; // Shift left by 6, instead of 4
+@
+
+
+1.3
+log
+@Prepare 3-bit compression logic
+@
+text
+@d28 2
+a29 2
+		i = *(int*)(*fptr[22])((void*)&dun);  //findIndex
+			ch = (unsigned char)i; //Converting index to char
+@
+
+
+1.2
+log
+@Added datastructures.h header file
+@
+text
+@d7 62
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+d4 1
+a4 1
+int compress3 (int fd, char* ma)
+@

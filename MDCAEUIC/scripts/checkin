@@ -1,0 +1,11 @@
+#! /bin/bash
+
+
+checkin()
+{
+		echo
+                for file in $(ls ../*.h) $(ls ../*.c)
+                do
+                        ci $file
+                done
+}

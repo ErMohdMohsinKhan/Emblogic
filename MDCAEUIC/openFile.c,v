@@ -1,0 +1,122 @@
+head	1.2;
+access;
+symbols;
+locks
+	root:1.2; strict;
+comment	@ * @;
+
+
+1.2
+date	2023.08.08.07.56.10;	author mohsin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.07.11.19.03.09;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@Takes the name of file from the user to be compressed and depending on the mode presents it (READ, WRITE)
+@
+
+
+1.2
+log
+@Opening file in the specific mode
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+void* openFile(void* mode)
+{
+	int *fd;
+	char ch;
+	char *filename;
+	printf("%s : Begin\n", __func__);
+	filename = (char*)malloc(20);
+	if (!filename)
+	{
+		perror("malloc");
+		exitProg("failure");
+	}
+	memset(filename, '\0', 20);
+	int i=0;
+	do
+	{
+		ch = getchar();
+		if (ch == '\n')
+		{
+			break;
+		}
+		*(filename + i++) = ch;
+
+	} while(1);
+	printf("%s : Filename : %s\n", __func__, filename);
+	
+	fd = (int*)malloc(sizeof(int));
+	if (!fd)
+        {
+                perror("malloc");
+		free(filename);
+                exitProg("failure");
+        }
+
+	  if (strncmp((char*)mode, "writing", 7) == 0)
+	  {
+		  *fd = open(filename, O_WRONLY);
+	  }
+    	else if (strncmp((char*)mode, "reading", 7) == 0)
+   	 {
+	    *fd = open(filename, O_RDONLY);
+   	 }
+	else if (strncmp((char*)mode, "creat", 7) == 0)
+         {
+            *fd = open(filename, O_CREAT|O_WRONLY);
+         }
+
+        if (*fd == -1)
+        {
+                perror("open");
+                exitProg("failure");
+        }
+
+	printf("%s : End\n", __func__);
+	return (void*)fd;
+}
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+d4 1
+a4 1
+int openFile(char* mode)
+d6 1
+a6 1
+	int fd;
+d29 10
+a38 1
+	  if (strncmp(mode, "writing", 7) == 0)
+d40 1
+a40 1
+		  fd = open(filename, O_WRONLY);
+d42 1
+a42 1
+    	else if (strncmp(mode, "reading", 7) == 0)
+d44 1
+a44 1
+	    fd = open(filename, O_RDONLY);
+d46 6
+a51 1
+        if (fd == -1)
+d58 1
+a58 1
+	return fd;
+@

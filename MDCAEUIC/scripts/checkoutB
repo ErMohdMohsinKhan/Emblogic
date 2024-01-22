@@ -1,0 +1,13 @@
+#!/bin/bash
+
+checkoutB()
+{
+		echo
+                for file in $(ls ../*.h,v) $(ls ../*.c,v)
+                do
+                        co $file
+                done
+		mv *.c ..
+		mv *.h ..
+}
+

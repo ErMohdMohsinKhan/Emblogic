@@ -1,0 +1,38 @@
+head	1.1;
+access;
+symbols;
+locks
+	root:1.1; strict;
+comment	@ * @;
+
+
+1.1
+date	2023.08.08.07.49.45;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@Create two data structures namely DSUnique and DSCompress
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@typedef struct
+{
+	char* ma;
+	int noc;
+	char ch;
+}DSUnique;
+
+typedef struct
+{
+        int fd;
+        char* ma;
+}DSCompress;
+
+@

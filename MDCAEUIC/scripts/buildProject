@@ -1,0 +1,14 @@
+#! /bin/bash
+
+buildProject()
+{
+                if ( make -C .. )
+                then
+                        echo "build successfully"
+                        flag=1;
+                else
+                        echo "ERROR : build failed"
+                read
+                fi
+}
+

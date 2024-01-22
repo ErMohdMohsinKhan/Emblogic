@@ -1,0 +1,45 @@
+head	1.1;
+access;
+symbols;
+locks
+	root:1.1; strict;
+comment	@ * @;
+
+
+1.1
+date	2023.08.08.07.55.22;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@Finding Index of the character read from the opened file in the master array
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+void* findIndex (void* arg)
+{
+	DSUnique *dun;
+	printf("%s : Begin\n",__func__);
+	dun = (DSUnique*)arg;
+	int i;
+	for(i=0; i<strlen(dun->ma); i++)
+	{
+		if (dun->ch == *(dun->ma+i))
+		{
+			var = i;
+			return (void*)&var;
+		}
+	}
+	printf("%s : End\n",__func__);
+	return 0;
+}
+@

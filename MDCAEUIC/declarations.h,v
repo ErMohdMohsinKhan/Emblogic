@@ -1,0 +1,242 @@
+head	1.10;
+access;
+symbols;
+locks
+	root:1.10; strict;
+comment	@ * @;
+
+
+1.10
+date	2023.11.18.05.51.32;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2023.08.08.07.50.13;	author mohsin;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2023.07.14.12.52.48;	author mohsin;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2023.07.14.12.50.28;	author mohsin;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2023.07.14.12.45.21;	author mohsin;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2023.07.14.11.55.23;	author mohsin;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2023.07.13.18.06.19;	author mohsin;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2023.07.12.15.42.12;	author mohsin;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2023.07.12.06.15.42;	author mohsin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.07.11.18.54.48;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@This file contains declarations for all the function prototypes used including mainMenu(), openFile(), and compressFile()
+@
+
+
+1.10
+log
+@Updating data types with DSCompress dada structure
+@
+text
+@#define NOF 23
+int init();
+extern int var;
+extern void* mainMenu(void*);
+extern void* exitProg(void*);
+extern void* openFile(void*);
+extern void* createMasterArray(void*);
+extern void* unique(void*);
+extern void* codelength(void*);
+extern void* compStats(void*);
+extern void* compressFile(void*);
+extern void* decompressFile (void*);
+extern void* decompStats(void*);
+extern void* compress2(void*);
+extern void* compress3(void*);
+extern void* compress4(void*);
+extern void* compress5(void*);
+extern void* compress6(void*);
+extern void* compress7(void*);
+extern void* decompress2(void*);
+extern void* decompress3(void*);
+extern void* decompress4(void*);
+extern void* decompress5(void*);
+extern void* decompress6(void*);
+extern void* decompress7(void*);
+extern void* findIndex(void*);
+extern void* (*fptr[NOF])(void*);
+@
+
+
+1.9
+log
+@Added findIndex declaration
+@
+text
+@d1 1
+a1 1
+#define NOF 71
+d20 6
+@
+
+
+1.8
+log
+@Declaring function prototype for init().
+@
+text
+@d1 1
+d3 19
+a21 32
+extern int mainMenu();
+extern int (*mame)();
+extern int exitProg(char*);
+extern int (*expr)(char*);
+extern int openFile(char*);
+extern int (*opfi)(char*);
+extern char* createMasterArray(int);
+extern char* (*crma)(int);
+extern int unique(char*, int, char);
+extern int (*uniq)(char*, int, char);
+extern int codelength(char*);
+extern int (*cole) (char*);
+extern int compStats();
+extern int (*cost)();
+extern int compressFile();
+extern int (*copf)();
+extern int decompressFile ();
+extern int (*dcof)();
+extern int decompStats();
+extern int (*dcst)();
+extern int compress2(int, char*);
+extern int (*cmp2)(int, char*);
+extern int compress3(int, char*);
+extern int (*cmp3)(int, char*);
+extern int compress4(int, char*);
+extern int (*cmp4)(int, char*);
+extern int compress5(int, char*);
+extern int (*cmp5)(int, char*);
+extern int compress6(int, char*);
+extern int (*cmp6)(int, char*);
+extern int compress7(int, char*);
+extern int (*cmp7)(int, char*);
+@
+
+
+1.7
+log
+@typo
+@
+text
+@d1 1
+@
+
+
+1.6
+log
+@Converted the whole program into function pointers
+Declared function pointer for every function as extern
+@
+text
+@d7 2
+a8 2
+extern char* createMasterArray(extern int);
+extern char* (*crma)(extern int);
+@
+
+
+1.5
+log
+@Declared all the compression functions which takes int fd and char* ma as input
+@
+text
+@d1 32
+a32 16
+int mainMenu();
+int exitProg(char*);
+int openFile(char* );
+char* createMasterArray(int);
+int unique(char*, int, char);
+int codelength(char*);
+int compStats();
+int compressFile();
+int decompressFile ();
+int decompStats();
+int compress2(int, char*);
+int compress3(int, char*);
+int compress4(int, char*);
+int compress5(int, char*);
+int compress6(int, char*);
+int compress7(int, char*);
+@
+
+
+1.4
+log
+@Declared codelength() which takes master array as char* as input
+@
+text
+@d11 6
+@
+
+
+1.3
+log
+@Declared unique () which takes 3 inputs as an argument i.e., char master_array, noc read so far, chracter to be checked whether it is unique or not
+@
+text
+@d6 1
+a6 1
+int codelength();
+@
+
+
+1.2
+log
+@Function decompressStats() is not ended with ';'
+@
+text
+@d5 1
+a5 1
+int unique();
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d10 1
+a10 1
+int decompStats()
+@

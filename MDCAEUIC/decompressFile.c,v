@@ -1,0 +1,311 @@
+head	1.13;
+access;
+symbols;
+locks
+	root:1.13; strict;
+comment	@ * @;
+
+
+1.13
+date	2023.11.18.05.52.49;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2023.11.17.20.31.42;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2023.11.17.20.29.19;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2023.11.17.20.25.22;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2023.11.17.20.23.08;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2023.11.17.20.21.24;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2023.11.17.20.16.25;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2023.11.17.20.15.03;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2023.11.17.20.04.28;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2023.11.17.19.42.07;	author mohsin;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2023.08.08.12.50.05;	author mohsin;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2023.08.08.07.54.36;	author mohsin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.07.11.19.00.11;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@Just printining begin and end of function
+@
+
+
+1.13
+log
+@Updating data types with DSCompress dada structure.
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+void* decompressFile(void* arg)
+{
+	printf("%s : Begin\n", __func__);
+	int fd, ek, ret;
+	DSCompress dco;
+	printf("%s : Give the filename of the Encryption Key\n", __func__);
+	getchar();
+	dco.fd = *(int*)(*fptr[2])((void*)"reading"); //openFile()
+        printf("%s : Enc Key File opened successfully, EK : %d\n", __func__, dco.fd);
+        dco.ma = (char*)(*fptr[3])((void*)&dco.fd); //createMasterArray
+        printf("%s : Master Array : %s\n",__func__, dco.ma);
+	close(dco.fd);
+/*	ret = read(ek, ma, 128); 
+	if (ret == -1)
+	{
+		perror("read");
+		(*fptr[1])((void*)"failure");
+	}*/
+	printf("%s : Give the filename to Decompress\n", __func__);
+ //       getchar();
+        dco.fd = *(int*)(*fptr[2])((void*)"reading"); //openFile()
+        printf("%s : File opened successfully, fd : %d\n", __func__, dco.fd);
+
+	
+        int cl = *(int*)(*fptr[5])((void*)dco.ma); //codelength
+        printf("%s : Code length of Master Array : %d\n",__func__, cl);
+        if ( (cl >= 2) && (cl <= 7) )
+        {
+                (*fptr[cl+14])((void*)&dco);
+        }
+        close(dco.fd); 
+
+	printf("%s : End\n", __func__);
+	return 0;
+}
+@
+
+
+1.12
+log
+@*** empty log message ***
+@
+text
+@a8 1
+	char *ma;
+d11 5
+a15 5
+	ek = *(int*)(*fptr[2])((void*)"reading"); //openFile()
+        printf("%s : Enc Key File opened successfully, EK : %d\n", __func__, ek);
+        ma = (char*)(*fptr[3])((void*)&ek); //createMasterArray
+        printf("%s : Master Array : %s\n",__func__, ma);
+	close(ek);
+d24 2
+a25 2
+        fd = *(int*)(*fptr[2])((void*)"reading"); //openFile()
+        printf("%s : File opened successfully, fd : %d\n", __func__, fd);
+a26 2
+	//printf("%s : Master Array : %s\n", __func__, ma);
+	//close(ek);
+d28 1
+a28 1
+        int cl = *(int*)(*fptr[5])((void*)ma); //codelength
+d30 1
+a30 1
+        if ( (cl >= 2) || (cl <= 7) )
+d32 1
+a32 1
+                (*fptr[cl+8])((void*)&dco);
+a34 1
+	close(fd);
+@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@d14 2
+a15 2
+        dco.ma = (char*)(*fptr[3])((void*)&ek); //createMasterArray
+        printf("%s : Master Array : %s\n",__func__, dco.ma);
+d31 1
+a31 1
+        int cl = *(int*)(*fptr[5])((void*)&dco.ma); //codelength
+@
+
+
+1.10
+log
+@*** empty log message ***
+@
+text
+@d31 1
+a31 1
+        int cl = *(int*)(*fptr[5])((void*)&ek); //codelength
+@
+
+
+1.9
+log
+@typo
+@
+text
+@d31 1
+a31 1
+        int cl = strlen(dco.ma);   //*(int*)(*fptr[5])((void*)&ek); //codelength
+@
+
+
+1.8
+log
+@typo
+@
+text
+@d11 1
+a11 1
+//	getchar();
+@
+
+
+1.7
+log
+@typo
+@
+text
+@d11 1
+a11 1
+	getchar();
+d24 1
+a24 1
+        getchar();
+@
+
+
+1.6
+log
+@typo
+@
+text
+@d11 1
+@
+
+
+1.5
+log
+@printing codelength
+@
+text
+@a9 5
+	printf("%s : Give the filename to Decompress\n", __func__);
+        getchar();
+        fd = *(int*)(*fptr[2])((void*)"reading"); //openFile()
+        printf("%s : File opened successfully, fd : %d\n", __func__, fd);
+
+d13 4
+a16 1
+	ret = read(ek, ma, 128); 
+d21 8
+a28 3
+	}
+	printf("%s : Master Array : %s\n", __func__, ma);
+	close(ek);
+d30 1
+a30 3
+     //   dco.ma = (char*)(*fptr[3])((void*)&ek); //createMasterArray
+       // printf("%s : Master Array : %s\n",__func__, dco.ma);
+        int cl = *(int*)(*fptr[5])((void*)&ek); //codelength
+@
+
+
+1.4
+log
+@Opening the encryption key file nd storing in master arry
+@
+text
+@d27 3
+a29 3
+        dco.ma = (char*)(*fptr[3])((void*)&ek); //createMasterArray
+        printf("%s : Master Array : %s\n",__func__, dco.ma);
+        int cl = *(int*)(*fptr[5])((void*)dco.ma); //codelength
+@
+
+
+1.3
+log
+@Opening the compressed file
+Opening and reading the Encryption key
+Reading and printing master Array
+@
+text
+@d8 1
+d17 1
+a17 1
+        printf("%s : File opened successfully, EK : %d\n", __func__, ek);
+d26 2
+a27 2
+	/*
+        dco.ma = (char*)(*fptr[3])((void*)&dco.fd); //createMasterArray
+d35 1
+a35 1
+        close(dco.fd); */
+@
+
+
+1.2
+log
+@Added datastructures.h header file
+@
+text
+@d7 30
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+d4 1
+a4 1
+int decompressFile ()
+@

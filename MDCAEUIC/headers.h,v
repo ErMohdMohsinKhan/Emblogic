@@ -1,0 +1,30 @@
+head	1.1;
+access;
+symbols;
+locks
+	root:1.1; strict;
+comment	@ * @;
+
+
+1.1
+date	2023.07.11.19.06.57;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@This includes all the headers file
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#include <stdio.h> //printf() and scanf()
+#include <stdlib.h> //exitFunc()
+#include <fcntl.h> //openfile()
+#include <unistd.h> //close
+#include <string.h> //filename from user
+@

@@ -1,0 +1,29 @@
+#! /bin/bash
+
+mainMenu()
+{
+        echo "<<<Main Menu>>>"
+        echo "1: Checkin"
+        echo "2: Check out for built"
+        echo "3: Build Project"
+        echo "4: Run Project"
+        echo "5: Check out for development"
+        echo "0: Exit the Program"
+        echo "Please enter your choice : "
+        read choice
+        case $choice in
+                1)
+                        checkin ;;
+                2)
+                        checkoutB ;;
+                3)
+                        buildProject ;;
+                4)
+                        runProject ;;
+                5)
+                        checkoutD ;;
+                0)
+                        exit 0;;
+        esac
+}
+

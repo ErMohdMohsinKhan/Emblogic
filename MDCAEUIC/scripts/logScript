@@ -1,0 +1,9 @@
+#! /bin/bash
+
+filename=log.`date '+%y%m%d'`
+touch $filename
+for file in $(ls ../*.h,v) $(ls ../*.c,v)
+do
+	rlog $file >> $filename
+done
+mv $filename ..

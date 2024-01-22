@@ -1,0 +1,349 @@
+head	1.16;
+access;
+symbols;
+locks
+	root:1.16; strict;
+comment	@ * @;
+
+
+1.16
+date	2023.12.10.16.16.33;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2023.12.10.16.09.19;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2023.12.10.16.01.18;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2023.12.10.14.10.03;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2023.11.18.08.30.59;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2023.11.18.08.25.33;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2023.11.18.08.17.14;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2023.11.18.08.11.32;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2023.11.18.08.05.52;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2023.11.18.07.59.35;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2023.11.18.07.51.54;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2023.11.18.07.34.38;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2023.11.18.06.55.01;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2023.11.18.06.45.30;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2023.11.18.06.44.18;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.11.18.05.52.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@creating function.
+@
+
+
+1.16
+log
+@*** empty log message ***
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+void* decompress4 (void *arg)
+{
+	int noc, ret, i, dfd;
+	unsigned char c, dc;
+	DSUnique dun;
+	printf("%s : Begin\n",__func__);
+	DSCompress *dco;
+	dco = (DSCompress*)arg;
+	dun.noc = lseek(dco->fd, 0, SEEK_END)-1;
+	lseek(dco->fd, 0, SEEK_SET);
+	printf("%s : Name the Decompressed File\n",__func__);
+	dfd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+	while(1)
+	{
+		ret = read(dco->fd, &dun.ch, 1);
+		if(ret == -1)
+		{
+			perror("read");
+                        (*fptr[1])((void*)"failure");
+		}
+		dun.noc--;
+		c = dun.ch;
+		printf("character read : %c\n", c);
+		c >>= 4;
+		i = (unsigned int)c;
+		printf("i : %u\n", i);
+		dc = dco->ma[i];
+		printf("dc : %c\n", dc);
+		ret = write(dfd, &dc, 1);
+		if(ret == -1)
+		{
+			perror("write");
+                        (*fptr[1])((void*)"failure");
+		}
+		c = dun.ch;
+		c <<= 4;
+		c >>= 4;
+		i = (unsigned int)c;
+		printf("i : %u\n", i);
+		dc = dco->ma[i];
+		printf("dc : %c\n", dc);
+		ret = write(dfd, &dc, 1);
+		if(ret == -1)
+		{
+			perror("write");
+                        (*fptr[1])((void*)"failure");
+		}
+		if(dun.noc<= 0)
+			break;
+	}
+	close(dfd);
+	printf("%s : End\n",__func__);
+	return 0;
+}
+@
+
+
+1.15
+log
+@*** empty log message ***
+@
+text
+@a41 5
+		/*if(i < 0)
+		{
+			printf("In i\n");
+			i = i * (-1);
+		}*/
+@
+
+
+1.14
+log
+@*** empty log message ***
+@
+text
+@a31 1
+		//sleep(1);
+d42 1
+a42 1
+		if(i < 0)
+d46 1
+a46 1
+		}
+@
+
+
+1.13
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+	char c, dc;
+@
+
+
+1.12
+log
+@*** empty log message ***
+@
+text
+@d28 2
+a29 2
+		i = (int)c;
+		printf("i : %d\n", i);
+d42 1
+a42 1
+		i = (int)c;
+d48 1
+a48 1
+		printf("i : %d\n", i);
+@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@d44 4
+a47 1
+			i = i * -1;
+@
+
+
+1.10
+log
+@*** empty log message ***
+@
+text
+@d43 2
+@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@a26 2
+	//	sleep(1);
+//		c = (int)c;
+d32 1
+a32 1
+		sleep(1);
+d43 1
+d45 1
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d45 1
+a45 1
+		dc = (dco->ma+i);
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d29 1
+a29 1
+		c >= 4;
+d42 2
+a43 2
+		c <= 4;
+		c >= 4;
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d27 2
+a28 1
+		sleep(1);
+d31 1
+d33 2
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d26 2
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d28 1
+a28 1
+		dc = (dco->ma+i);
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+	int noc, ret, i;
+d15 1
+a15 1
+	int dfd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+a47 1
+		close(dfd);
+d49 1
+@
+
+
+1.2
+log
+@Implementing the decompression logic
+@
+text
+@d15 1
+a15 1
+	dfd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d6 3
+d10 40
+@

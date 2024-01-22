@@ -1,0 +1,207 @@
+
+RCS file: declarations.h,v
+Working file: declarations.h
+head: 1.2
+branch:
+locks: strict
+	mohsin: 1.2
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 2;	selected revisions: 2
+description:
+This file contains declarations for all the function prototypes used including mainMenu(), openFile(), and compressFile()
+----------------------------
+revision 1.2	locked by: mohsin;
+date: 2023/07/12 06:15:42;  author: mohsin;  state: Exp;  lines: +1 -1
+Function decompressStats() is not ended with ';'
+----------------------------
+revision 1.1
+date: 2023/07/11 18:54:48;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: headers.h,v
+Working file: headers.h
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+This includes all the headers file
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:06:57;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: compressFile.c,v
+Working file: compressFile.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Prompt the user to enter a filename to be compressed. Then moves the control to openFile() by calling it and also create char* to masterarray
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 18:56:51;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: compStats.c,v
+Working file: compStats.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Just printining begin and end
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 18:58:43;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: createMasterArray.c,v
+Working file: createMasterArray.c
+head: 1.2
+branch:
+locks: strict
+	mohsin: 1.2
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 2;	selected revisions: 2
+description:
+Using LSEEK() to print the total numbers of character
+including EOF character (which will be removed in next version)
+----------------------------
+revision 1.2	locked by: mohsin;
+date: 2023/07/12 06:16:12;  author: mohsin;  state: Exp;  lines: +1 -1
+The EOF character is removed from the count by subtracting 1 from LSEEK
+----------------------------
+revision 1.1
+date: 2023/07/11 18:59:13;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: decompressFile.c,v
+Working file: decompressFile.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Just printining begin and end of function
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:00:11;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: decompStats.c,v
+Working file: decompStats.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Just printining begin and end of function
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:00:27;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: exitProg.c,v
+Working file: exitProg.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Print the Exit status which determines whether program exited gracefully or due to some error
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:00:36;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: main.c,v
+Working file: main.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+This is the main file which defines flow of Execution of the Project.
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:01:25;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: mainMenu.c,v
+Working file: mainMenu.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Prints the Menu before the user to choose it from
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:02:10;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================
+
+RCS file: openFile.c,v
+Working file: openFile.c
+head: 1.1
+branch:
+locks: strict
+	mohsin: 1.1
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 1;	selected revisions: 1
+description:
+Takes the name of file from the user to be compressed and depending on the mode presents it (READ, WRITE)
+----------------------------
+revision 1.1	locked by: mohsin;
+date: 2023/07/11 19:03:09;  author: mohsin;  state: Exp;
+Initial revision
+=============================================================================

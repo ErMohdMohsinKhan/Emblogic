@@ -1,0 +1,256 @@
+head	1.10;
+access;
+symbols;
+locks
+	root:1.10; strict;
+comment	@ * @;
+
+
+1.10
+date	2023.12.10.16.16.31;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2023.12.10.16.01.17;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2023.11.18.09.21.57;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2023.11.18.06.06.17;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2023.11.18.05.59.52;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2023.08.08.12.50.00;	author mohsin;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2023.08.08.08.25.00;	author mohsin;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2023.08.08.08.20.48;	author mohsin;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2023.08.08.07.52.36;	author mohsin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.07.14.11.58.22;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@This function would comprees file of code length 4
+@
+
+
+1.10
+log
+@*** empty log message ***
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+void* compress4 (void* arg)
+{
+	DSCompress *dco;
+	DSUnique dun;
+	int ret, i, size, cfd;
+	unsigned char byt, ch;
+	printf("%s : Begin\n",__func__);
+	dco = (DSCompress*)arg;
+	size = lseek(dco->fd, 0, SEEK_END)-1;
+	lseek(dco->fd, 0, SEEK_SET);
+	printf("%s : Please give a name to the Compressed File\n", __func__);
+	cfd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+	while(1)
+	{
+		byt ^= byt;
+		ret = read(dco->fd, &dun.ch, 1);
+		if (ret == -1)
+		{
+			perror("read");
+			(*fptr[1])((void*)"failure");
+		}
+		size--;
+		dun.ma = dco->ma;
+		i = *(int*)(*fptr[22])((void*)&dun);	//findIndex
+		ch = (unsigned char)i; //Converting index to char
+		ch <<= 4;
+		byt |= ch;
+		if (size == 0)
+			goto LA;
+		ret = read(dco->fd, &dun.ch, 1);
+                if (ret == -1)
+                {
+                        perror("read");
+                        (*fptr[1])((char*)"failure");
+                }
+		size--;
+		dun.ma = dco->ma;	
+                i = *(int*)(*fptr[22])((void*)&dun);
+                ch = (unsigned char)i;
+                ch <<= 4;
+                ch >>= 4;
+                byt |= ch;
+LA:		printf("Byte : %d\n", byt);		
+		ret= write (cfd, &byt, 1);
+		if (ret == -1)
+                {
+                        perror("write");
+                        (*fptr[1])((void*)"failure");
+                }
+		if (size == 0)
+			break;
+	}
+	close(cfd);
+	printf("%s : Please give a name of the Encryption key File\n", __func__);
+        cfd = *(int*)(*fptr[2])((void*)"creat"); //Openfile
+	write(cfd, dco->ma, strlen(dco->ma));
+	if (ret == -1)
+        {
+               perror("write");
+               (*fptr[0])((void*)"failure");
+        }
+
+	close(cfd);
+
+	printf("%s : End\n",__func__);
+	return 0;
+}
+@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@d46 2
+a47 2
+		printf("Byte : %d\n", byt);		
+LA:		ret= write (cfd, &byt, 1);
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d28 1
+a28 1
+		ch = (char)i; //Converting index to char
+d42 1
+a42 1
+                ch = (char)i;
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d46 1
+a46 1
+		
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d41 1
+a41 1
+                i = *(int*)(*fptr[16])((void*)&dun);
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d27 1
+a27 1
+		i = *(int*)(*fptr[16])((void*)&dun);	//findIndex
+@
+
+
+1.4
+log
+@typo
+@
+text
+@d23 1
+a23 1
+			(*fptr[0])((char*)"failure");
+d37 1
+a37 1
+                        (*fptr[0])((char*)"failure");
+d51 1
+a51 1
+                        (*fptr[0])((char*)"failure");
+d63 1
+a63 1
+               (*fptr[0])((char*)"failure");
+@
+
+
+1.3
+log
+@typo
+@
+text
+@d33 1
+a33 1
+		ret = read(dco-->fd, &dun.ch, 1);
+@
+
+
+1.2
+log
+@Creating an algorithm to compress a text file, in which 1 byte represents two characters. 
+Deploying concepts of Ex-OR and << and >> left and right shift
+@
+text
+@d19 1
+a19 1
+		ret = read(dco-->fd, &dun.ch, 1);
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+d4 1
+a4 1
+int compress4 (int fd, char* ma)
+d6 4
+d11 57
+@

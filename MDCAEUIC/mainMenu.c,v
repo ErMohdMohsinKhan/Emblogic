@@ -1,0 +1,77 @@
+head	1.2;
+access;
+symbols;
+locks
+	root:1.2; strict;
+comment	@ * @;
+
+
+1.2
+date	2023.08.08.07.56.06;	author mohsin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.07.11.19.02.10;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@Prints the Menu before the user to choose it from
+@
+
+
+1.2
+log
+@Added datastructures.h header file
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+void* mainMenu(void* arg)
+{
+	printf("%s : Begin\n", __func__);
+		printf("%s : __MAIN MENU__\n", __func__);
+		printf("%s : ----------------------\n", __func__);
+		printf("%s : 1 : Compress File\n", __func__);
+		printf("%s : 2 : Compression Statistics\n", __func__);
+		printf("%s : 3 : Decompress File\n", __func__);
+		printf("%s : 4 : Deompression Statistics\n", __func__);
+		printf("%s : 0 : Exit Program\n", __func__);
+		printf("%s : ----------------------\n\n", __func__);
+		printf("%s : Please enter your choice :\n", __func__);
+		scanf("%d", &var);
+	if (var==0)
+	{
+		(*fptr[var+1])((void*)"success");
+	}
+	else if ((var >=1) || (var<=4))
+	{
+		(*fptr[var+5])(NULL);
+	}
+	printf("%s : End\n", __func__);
+	return 0;
+}
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+d4 1
+a4 1
+int mainMenu()
+a6 1
+	int ch;
+d16 9
+a24 1
+		scanf("%d", &ch);
+d26 1
+a26 1
+	return ch;
+@

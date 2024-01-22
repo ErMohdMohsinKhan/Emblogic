@@ -1,0 +1,223 @@
+head	1.8;
+access;
+symbols;
+locks
+	root:1.8; strict;
+comment	@ * @;
+
+
+1.8
+date	2023.08.08.08.18.14;	author mohsin;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2023.08.08.07.54.23;	author mohsin;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2023.07.14.12.46.20;	author mohsin;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2023.07.14.11.58.39;	author mohsin;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2023.07.13.18.08.18;	author mohsin;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2023.07.13.18.07.12;	author mohsin;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2023.07.12.15.28.40;	author mohsin;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2023.07.11.18.56.51;	author mohsin;	state Exp;
+branches;
+next	;
+
+
+desc
+@Prompt the user to enter a filename to be compressed. Then moves the control to openFile() by calling it and also create char* to masterarray
+@
+
+
+1.8
+log
+@typo
+@
+text
+@#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+void* compressFile (void* arg)
+{
+	DSCompress dco;
+	printf("%s : Begin\n", __func__);
+	printf("%s : Give the filename to compress\n", __func__);
+	getchar();
+	dco.fd = *(int*)(*fptr[2])((void*)"reading"); //openFile()
+	printf("%s : File opened successfully, fd : %d\n", __func__, dco.fd);
+	dco.ma = (char*)(*fptr[3])((void*)&dco.fd); //createMasterArray
+	printf("%s : Master Array : %s\n",__func__, dco.ma);
+	int cl = *(int*)(*fptr[5])((void*)dco.ma); //codelength
+	printf("%s : Code length of Master Array : %d\n",__func__, cl);
+	if ( (cl >= 2) || (cl <= 7) )
+	{
+		(*fptr[cl+8])((void*)&dco);
+	}
+	close(dco.fd);	
+	//free(dco.fd);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+@
+
+
+1.7
+log
+@Added datastructures.h header file
+@
+text
+@d18 1
+a18 1
+		(*fptr[cl+8])(void*);
+d21 1
+a21 1
+	free(dco.fd);
+@
+
+
+1.6
+log
+@Callinh all the compression gunctions by function pointers()
+@
+text
+@d2 1
+d4 1
+a4 1
+int compressFile ()
+d6 1
+a6 2
+	int fd;
+	char* ma;
+d10 5
+a14 5
+	fd=(*opfi)("reading"); //openFile()
+	printf("%s : File opened successfully, fd : %d\n", __func__, fd);
+	ma = (*crma)(fd); //createMasterArray
+	printf("%s : Master Array : %s\n",__func__,ma);
+	int cl = (*cole)(ma); //codelength
+d16 1
+a16 1
+	switch(cl)
+d18 1
+a18 19
+		case 2:
+			(*cmp2)(fd, ma);
+			break;
+		
+		case 3:
+			(*cmp3)(fd, ma);
+			break;
+		case 4:
+			(*cmp4)(fd, ma);
+			break;
+		case 5:
+			(*cmp5)(fd, ma);
+			break;
+		case 6:
+			(*cmp6)(fd, ma);
+			break;
+		case 7:
+			(*cmp7)(fd, ma);
+			break;
+d20 2
+a21 1
+	close(fd);	
+@
+
+
+1.5
+log
+@Using sitch case, depending on code length, calling appropriate compression function
+@
+text
+@d10 1
+a10 1
+	fd=openFile("reading");
+d12 1
+a12 1
+	ma = createMasterArray(fd);
+d14 1
+a14 1
+	int cl = codelength(ma);
+d19 1
+a19 1
+			compress2(fd, ma);
+d23 1
+a23 1
+			compress3(fd, ma);
+d26 1
+a26 1
+			compress4(fd, ma);
+d29 1
+a29 1
+			compress5(fd, ma);
+d32 1
+a32 1
+			compress6(fd, ma);
+d35 1
+a35 1
+			compress7(fd, ma);
+@
+
+
+1.4
+log
+@typo
+@
+text
+@d16 22
+@
+
+
+1.3
+log
+@Printing codelength
+@
+text
+@d15 1
+a15 1
+	print("%s : Code length of Master Array : %d\n",__func__, cl);
+@
+
+
+1.2
+log
+@Just printing master array elemnts in comprssion file
+@
+text
+@d14 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@a11 1
+	printf("%s : Master Array : \n",__func__,ma);
+d13 1
+@

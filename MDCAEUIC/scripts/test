@@ -1,0 +1,20 @@
+#! /bin/bash
+
+flag=0
+
+source ./checkin
+
+source ./checkoutB
+
+source ./buildProject
+
+source ./runProject
+
+source ./checkoutD
+
+source ./mainMenu
+
+while true
+do
+	mainMenu
+done
