@@ -1,0 +1,9 @@
+#include "headers.h"
+#include "class.h"
+DistFeet::DistFeet(const DistFeet &obj)
+{
+	cout<<__func__<<": Begin Copy Constructor"<<endl;
+	feet = obj.feet;
+	inch = obj.inch;
+	cout<<__func__<<": End Copy Constructor"<<endl;
+}

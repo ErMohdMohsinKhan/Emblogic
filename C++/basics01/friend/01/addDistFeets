@@ -1,0 +1,10 @@
+#include "headers.h"
+#include "class.h"
+
+void DistFeet::addDistFeets (DistFeet da, DistFeet db)
+{
+	cout<<__func__<<": Begin"<<endl;
+	feet = da.feet + db.feet;
+	inch = da.inch + da.inch;
+	cout<<__func__<<": End"<<endl;
+}

@@ -1,0 +1,9 @@
+#include "headers.h"
+#include "class.h"
+DistMeter::DistMeter(const DistMeter &obj)
+{
+	cout<<__func__<<": Begin Copy Constructor"<<endl;
+	meter = obj.meter;
+	cmeter = obj.cmeter;
+	cout<<__func__<<": End Copy Constructor"<<endl;
+}

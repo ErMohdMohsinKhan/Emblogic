@@ -1,0 +1,53 @@
+#include"headers.h"
+#include"class.h"
+Test::Test()
+{
+	cout<<"Zero Arg Const"<<endl;
+}
+#include"headers.h"
+#include"class.h"
+int main()
+{
+	Test t1;
+	t1.myFunc();
+	t1.myFunc(5);
+	t1.myFunc(5, 10);
+	t1.myFunc(5, 10, 15);
+	t1.myFunc(5, 10, 15, 20);
+	return 0;
+}
+#include"headers.h"
+#include"class.h"
+int Test::myFunc(int a, int b, int c)
+{
+	cout<<__func__<<" : "<<a<<" : "<<b<<" : "<<c<<endl;
+	return 0;
+}
+#include"headers.h"
+#include"class.h"
+int Test::myFunc(int a, int b, int c, int d)
+{
+	cout<<__func__<<" : "<<a<<" : "<<b<<" : "<<c<<" : "<<d<<endl;
+	return 0;
+}
+#include"headers.h"
+#include"class.h"
+int Test::myFunc(int a)
+{
+	cout<<__func__<<" : "<<a<<endl;
+	return 0;
+}
+#include"headers.h"
+#include"class.h"
+int Test::myFunc(int a, int b)
+{
+	cout<<__func__<<" : "<<a<<" : "<<b<<endl;
+	return 0;
+}
+#include"headers.h"
+#include"class.h"
+int Test::myFunc()
+{
+	cout<<__func__<<endl;
+	return 0;
+}

@@ -1,0 +1,51 @@
+using namespace std;
+
+class Distance
+{
+	private:
+		int feet;
+		float inches;
+	public:
+		Distance();
+		Distance(int ft, float in);
+		friend istream& operator >> (istream&, Distance&);
+		friend ostream& operator >> (ostream&, const Distance&);
+};
+#include <iostream>
+#include "headers.h"
+#include "class.h"
+
+istream& operator >> (istream& i, Distance& d)
+{
+	cout<<__func__<<" : Begin "<<endl;
+	cout<<"Enter feet :";
+	i>>d.feet;
+	cout<<"Enter inches :";
+	i>>d.inches;
+	cout<<__func__<<" : End"<<endl;
+	return i;
+}
+#include "headers.h"
+#include "class.h"
+
+ostream& operator >> (ostream& o, const Distance& d)
+{
+	cout<<__func__<<" : Begin"<<endl;
+	o<<d.feet<<"\' "<<d.inches<<"\""<<endl;
+	cout<<__func__<<" : End"<<endl;
+	return o;
+}
+#include "headers.h"
+#include "class.h"
+
+int main ()
+{
+	Distance dist1, dist2;
+	Distance dist3(15, 2.25);
+	cout << "Enter distance in feei/inch :" <<endl;
+	cin >> dist1 >> dist2;
+	cout << "dist1 = " << dist1 << endl;
+	<< "dist2 = " <<dist2 << endl;
+	<< "dist3 = " << dist3 << endl;
+	return 0;
+}

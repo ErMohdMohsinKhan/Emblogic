@@ -1,0 +1,72 @@
+#include "headers.h"
+#include "classes.h"
+Distance Distance::addDistance(Distance db)
+{
+	cout<<__func__<<" : Begin"<<endl;
+	Distance dl;
+	dl.feet = db.feet/12;
+	feet = feet/12;
+	dl.inch = db.inch - (dl.feet*12);
+	inch = inch - (inch*12);
+	dl.feet = feet + db.feet;
+	dl.inch = inch + dl.inch;
+	if(dl.inch >= 12)
+	{
+		dl.feet++;
+		dl.inch = dl.inch - 12;
+	}
+	cout<<__func__<<" : Feet : "<<dl.feet<<feet<<endl;
+	cout<<__func__<<" : Inch : "<<dl.inch<<feet<<endl;
+	cout<<__func__<<" : End"<<endl;
+	return dl;
+}
+
+#include "headers.h"
+#include "classes.h"
+
+void Distance::display ()
+{
+//        cout<<__func__<<" : Begin"<<endl;
+        cout<<feet<<"' ";
+        cout<<inch<<"\" ";
+  //      cout<<__func__<<" : End"<<endl;
+}
+#include "headers.h"
+#include "classes.h"
+Distance::Distance(float in)
+{
+	cout<<__func__<<" : Begin : Two (Argument Constructor)"<<endl;
+	feet = in/12;
+	inch = in - (feet*12);
+	cout<<__func__<<" : End : Two (Argument Constructor)"<<endl;
+}
+#include "headers.h"
+#include "classes.h"
+Distance::Distance()
+{
+	cout<<__func__<<" : Begin : Distance (Zero Constructor)"<<endl;
+	feet = 0;
+	inch = 0.0;
+	cout<<__func__<<" : End : Distance (Zero Constructor)"<<endl;
+}
+#include "headers.h"
+#include "classes.h"
+int main (void)
+{
+	cout<<__func__<<" : Begin"<<endl;
+	Distance d1(80.88);
+	Distance d2 (15.84);
+	Distance ds;
+	//d2.getDistance();
+	d1.display();
+	d2.display();
+	ds = d1.addDistance(d2);
+
+	d1.display();
+	cout<<" + ";
+	d2.display();
+	cout<<" = ";
+	ds.display();
+	cout<<endl;
+	cout<<__func__<<" : End"<<endl;
+}

@@ -1,0 +1,36 @@
+#include "headers.h"
+#include "class.h"
+Array::Array()
+{
+	data = 0;
+}
+#include "headers.h"
+#include "class.h"
+int Array::display()
+{
+	cout<<"Data : "<<data<<endl;
+	return 0;
+}
+#include "headers.h"
+#include "class.h"
+int Array::getValue(int d)
+{
+	data = d;
+	return 0;
+}
+#include "headers.h"
+#include "class.h"
+int main()
+{
+	int size;
+	Array *a1;
+	cout<<"Please enter the size of array"<<endl;
+	cin>>size;
+	a1 = new Array[size];
+	for(int i=0; i<size; i++)
+	{
+		a1->getValue(i+5);
+		a1->display();
+	}
+	return 0;
+}
