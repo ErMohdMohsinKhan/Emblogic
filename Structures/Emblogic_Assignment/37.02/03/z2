@@ -1,0 +1,286 @@
+"""
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+typedef struct
+{
+int stnumber;
+char stname[20];
+char sex;
+float quiz1;
+float quiz2;
+float assignment;
+float midterm;
+float fin;
+float total;
+}student;
+
+int mainMenu();
+int addRec(student*);
+int delRec(student*);
+int updRec();
+int view(student*);
+int agst();
+int maxSc();
+int minSc();
+int stdId();
+int sortTot();
+
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+int addRec (student *st)
+{
+	printf("%s : Begin\n", __func__);
+	numRecords++;
+	printf("%s : Enter student number\n", __func__);
+	scanf("%d", &st->stnumber);
+	getchar();
+	printf("%s : Enter student name\n", __func__);
+	fgets(st->stname, 20, stdin);
+	int len;
+	len = strlen(st->stname);
+	st->stname[len-1] = '\0';
+	printf("%s : Enter sex (M/F)\n", __func__);
+	scanf(" %c", &st->sex);
+	printf("%s : Enter Quiz1 Marks (out of 5.0)\n", __func__);
+	scanf("%f", &st->quiz1);
+	printf("%s : Enter Quiz2 Marks (out of 5.0)\n", __func__);
+	scanf("%f", &st->quiz2);
+	printf("%s : Enter Assignment Marks (out of 10.0)\n", __func__);
+	scanf("%f", &st->assignment);
+	printf("%s : Enter Midterm Marks (out of 20.0)\n", __func__);
+	scanf("%f", &st->midterm);
+	printf("%s : Enter Final Marks (out of 60.0)\n", __func__);
+	scanf("%f", &st->fin);
+	printf("%s : Enter Total Marks (out of 100.0)\n", __func__);
+	scanf("%f", &st->total);
+
+	printf("%s : End\n", __func__);
+	return numRecords;;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int agst (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "declarations.h"
+
+int delRec(student *st, int numStudents) {
+    printf("%s : Begin\n", __func__);
+    int stNumberToDelete;
+    int indexToDelete = -1;
+
+    if (numStudents == 0) {
+        printf("No records to delete.\n");
+        printf("%s : End\n", __func__);
+        return 0;
+    }
+
+    printf("%s : Enter student number to delete: \n", __func__);
+    scanf("%d", &stNumberToDelete);
+
+    for (int i = 0; i < numStudents; i++) {
+        if (st[i].stnumber == stNumberToDelete) {
+            indexToDelete = i;
+            break;
+        }
+    }
+
+    if (indexToDelete == -1) {
+        printf("Student with the given number not found.\n");
+    } else {
+        // Shift elements to overwrite the element at indexToDelete
+        for (int i = indexToDelete; i < numStudents - 1; i++) {
+            st[i] = st[i + 1];
+        }
+        numStudents--;
+        printf("Student with number %d deleted successfully.\n", stNumberToDelete);
+    }
+
+    printf("%s : End\n", __func__);
+    return 0;
+}
+
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+int numRecords = 0;
+int main (void)
+{
+	printf("%s : Begin\n", __func__);
+	student *st;
+        st = (student*) malloc(20 * sizeof(student));
+        if (!st)
+        {
+                perror("malloc");
+                exit(EXIT_FAILURE);
+        }
+
+	int ch;
+	char res;
+	while (1)
+	{
+	ch = mainMenu();
+	switch(ch)
+	{
+		case 1:
+			numRecords = addRec(st);
+			break;
+		case 2:
+			delRec(st, numRecords);
+			break;
+		case 3:
+			updRec();
+			break;
+		case 4:
+			view(st);
+			break;
+		case 5:
+			agst();
+			break;
+		case 6:
+			maxSc();
+			break;
+		case 7:
+			minSc();
+			break;
+		case 8:
+			stdId();
+			break;
+		case 9:
+			sortTot();
+			break;
+	}
+	printf("%s : Do you want to continue (y/n)\n", __func__);
+	scanf(" %c", &res);
+	if (res != 'y')
+		break;
+	}
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int mainMenu (void)
+{
+	printf("%s : Begin\n", __func__);
+
+	printf("%s : <<<MENU>>>\n", __func__);
+
+	printf("%s : 1. Add student records\n", __func__);
+	printf("%s : 2. Delete student records\n", __func__);
+	printf("%s : 3. Update student records\n", __func__);
+	printf("%s : 4. View all student records\n", __func__);
+	printf("%s : 5. Calculate an average of a selected student's scores\n", __func__);
+	printf("%s : 6. Show student who gets the max total scores\n", __func__);
+	printf("%s : 7. Show student who gets the min total scores\n", __func__);
+	printf("%s : 8. Find student by ID\n", __func__);
+	printf("%s : 9. Sort records by total scores\n", __func__);
+	
+	int choice;
+	printf("%s : Enter your choice\n", __func__);
+	scanf("%d", &choice);
+
+	printf("%s : End\n", __func__);
+	return choice;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int maxSc (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int minSc (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int sortTot (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int stdId (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int updRec (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int view (student *st)
+{
+	printf("%s : Begin\n", __func__);
+	if (st != NULL)
+	{
+	printf("\n----------------------------------------------------------------------------------------\n");
+	printf("R.No.\tName\t\tSex\tQuiz1\tQuiz2\tAssg\tMidTerm\t Final\tTotal\n");
+	printf("----------------------------------------------------------------------------------------\n");
+	printf("%3d\t%s\t %c\t %.1f\t %.1f\t%.1f\t %.1f\t %.1f\t %.1f\n", st->stnumber, st->stname, st->sex, st->quiz1, st->quiz2, st->assignment, st->midterm, st->fin, st->total);
+	printf("----------------------------------------------------------------------------------------\n\n");
+	}
+	else
+	{
+		printf("%s : No Records to show\n", __func__);
+	}
+	printf("%s : End\n", __func__);
+	return 0;
+}
+"""
+
+ERROR : 
+In file included from delRec.c:2:
+declarations.h:3:12: error: unknown type name ‘student’
+    3 | int addRec(student*);
+      |            ^~~~~~~
+declarations.h:4:12: error: unknown type name ‘student’
+    4 | int delRec(student*, int);
+      |            ^~~~~~~
+declarations.h:6:10: error: unknown type name ‘student’
+    6 | int view(student*);
+      |          ^~~~~~~
+delRec.c:4:12: error: unknown type name ‘student’
+    4 | int delRec(student *st, int numStudents) {
+      |            ^~~~~~~
+

@@ -1,0 +1,440 @@
+"""
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+typedef struct
+{
+int stnumber;
+char stname[20];
+char sex;
+float quiz1;
+float quiz2;
+float assignment;
+float midterm;
+float fin;
+float total;
+}student;
+
+int mainMenu();
+int addRec(student*);
+int delRec(student*);
+int updRec();
+int view(student*);
+int agst();
+int maxSc();
+int minSc();
+int stdId();
+int sortTot();
+
+
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int addRec (student *st)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : Enter student number\n", __func__);
+	scanf("%d", &st->stnumber);
+	getchar();
+	printf("%s : Enter student name\n", __func__);
+	fgets(st->stname, 20, stdin);
+	int len;
+	len = strlen(st->stname);
+	st->stname[len-1] = '\0';
+	printf("%s : Enter sex (M/F)\n", __func__);
+	scanf(" %c", &st->sex);
+	printf("%s : Enter Quiz1 Marks (out of 5.0)\n", __func__);
+	scanf("%f", &st->quiz1);
+	printf("%s : Enter Quiz2 Marks (out of 5.0)\n", __func__);
+	scanf("%f", &st->quiz2);
+	printf("%s : Enter Assignment Marks (out of 10.0)\n", __func__);
+	scanf("%f", &st->assignment);
+	printf("%s : Enter Midterm Marks (out of 20.0)\n", __func__);
+	scanf("%f", &st->midterm);
+	printf("%s : Enter Final Marks (out of 60.0)\n", __func__);
+	scanf("%f", &st->fin);
+	printf("%s : Enter Total Marks (out of 100.0)\n", __func__);
+	scanf("%f", &st->total);
+
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int agst (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int delRec (student *d)
+{
+	printf("%s : Begin\n", __func__);
+	char res;
+	printf("%s : Sure you want to delete Records?\n", __func__);
+	scanf(" %c", &res);
+	if (res == 'y')
+	{
+		d = NULL;
+	}
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int main (void)
+{
+	printf("%s : Begin\n", __func__);
+	student *st;
+        st = (student*) malloc(20 * sizeof(student));
+        if (!st)
+        {
+                perror("malloc");
+                exit(EXIT_FAILURE);
+        }
+
+	int ch;
+	char res;
+	while (1)
+	{
+	ch = mainMenu();
+	switch(ch)
+	{
+		case 1:
+			addRec(st);
+			break;
+		case 2:
+			delRec(st);
+			break;
+		case 3:
+			updRec();
+			break;
+		case 4:
+			view(st);
+			break;
+		case 5:
+			agst();
+			break;
+		case 6:
+			maxSc();
+			break;
+		case 7:
+			minSc();
+			break;
+		case 8:
+			stdId();
+			break;
+		case 9:
+			sortTot();
+			break;
+	}
+	printf("%s : Do you want to continue (y/n)\n", __func__);
+	scanf(" %c", &res);
+	if (res != 'y')
+		break;
+	}
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int mainMenu (void)
+{
+	printf("%s : Begin\n", __func__);
+
+	printf("%s : <<<MENU>>>\n", __func__);
+
+	printf("%s : 1. Add student records\n", __func__);
+	printf("%s : 2. Delete student records\n", __func__);
+	printf("%s : 3. Update student records\n", __func__);
+	printf("%s : 4. View all student records\n", __func__);
+	printf("%s : 5. Calculate an average of a selected student's scores\n", __func__);
+	printf("%s : 6. Show student who gets the max total scores\n", __func__);
+	printf("%s : 7. Show student who gets the min total scores\n", __func__);
+	printf("%s : 8. Find student by ID\n", __func__);
+	printf("%s : 9. Sort records by total scores\n", __func__);
+	
+	int choice;
+	printf("%s : Enter your choice\n", __func__);
+	scanf("%d", &choice);
+
+	printf("%s : End\n", __func__);
+	return choice;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int maxSc (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int minSc (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int sortTot (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int stdId (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int updRec (void)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int view (student *st)
+{
+	printf("%s : Begin\n", __func__);
+	printf("\n----------------------------------------------------------------------------------------\n");
+	printf("R.No.\tName\t\tSex\tQuiz1\tQuiz2\tAssg\tMidTerm\t Final\tTotal\n");
+	printf("----------------------------------------------------------------------------------------\n");
+	printf("%3d\t%s\t %c\t %.1f\t %.1f\t%.1f\t %.1f\t %.1f\t %.1f\n", st->stnumber, st->stname, st->sex, st->quiz1, st->quiz2, st->assignment, st->midterm, st->fin, st->total);
+	printf("----------------------------------------------------------------------------------------\n\n");
+	printf("%s : End\n", __func__);
+	return 0;
+}
+"""
+
+OUTPUT : 
+main : Begin
+mainMenu : Begin
+mainMenu : <<<MENU>>>
+mainMenu : 1. Add student records
+mainMenu : 2. Delete student records
+mainMenu : 3. Update student records
+mainMenu : 4. View all student records
+mainMenu : 5. Calculate an average of a selected student's scores
+mainMenu : 6. Show student who gets the max total scores
+mainMenu : 7. Show student who gets the min total scores
+mainMenu : 8. Find student by ID
+mainMenu : 9. Sort records by total scores
+mainMenu : Enter your choice
+1
+mainMenu : End
+addRec : Begin
+addRec : Enter student number
+001
+addRec : Enter student name
+Ishan Ali
+addRec : Enter sex (M/F)
+M
+addRec : Enter Quiz1 Marks (out of 5.0)
+4.0
+addRec : Enter Quiz2 Marks (out of 5.0)
+4.5
+addRec : Enter Assignment Marks (out of 10.0)
+7.5
+addRec : Enter Midterm Marks (out of 20.0)
+15
+addRec : Enter Final Marks (out of 60.0)
+51
+addRec : Enter Total Marks (out of 100.0)
+89.5
+addRec : End
+main : Do you want to continue (y/n)
+y
+mainMenu : Begin
+mainMenu : <<<MENU>>>
+mainMenu : 1. Add student records
+mainMenu : 2. Delete student records
+mainMenu : 3. Update student records
+mainMenu : 4. View all student records
+mainMenu : 5. Calculate an average of a selected student's scores
+mainMenu : 6. Show student who gets the max total scores
+mainMenu : 7. Show student who gets the min total scores
+mainMenu : 8. Find student by ID
+mainMenu : 9. Sort records by total scores
+mainMenu : Enter your choice
+4
+mainMenu : End
+view : Begin
+
+----------------------------------------------------------------------------------------
+R.No.	Name		Sex	Quiz1	Quiz2	Assg	MidTerm	 Final	Total
+----------------------------------------------------------------------------------------
+  1	Ishan Ali	 M	 4.0	 4.5	7.5	 15.0	 51.0	 89.5
+----------------------------------------------------------------------------------------
+
+view : End
+main : Do you want to continue (y/n)
+y
+mainMenu : Begin
+mainMenu : <<<MENU>>>
+mainMenu : 1. Add student records
+mainMenu : 2. Delete student records
+mainMenu : 3. Update student records
+mainMenu : 4. View all student records
+mainMenu : 5. Calculate an average of a selected student's scores
+mainMenu : 6. Show student who gets the max total scores
+mainMenu : 7. Show student who gets the min total scores
+mainMenu : 8. Find student by ID
+mainMenu : 9. Sort records by total scores
+mainMenu : Enter your choice
+1
+mainMenu : End
+addRec : Begin
+addRec : Enter student number
+002
+addRec : Enter student name
+Amra
+addRec : Enter sex (M/F)
+F
+addRec : Enter Quiz1 Marks (out of 5.0)
+4.0
+addRec : Enter Quiz2 Marks (out of 5.0)
+3.5
+addRec : Enter Assignment Marks (out of 10.0)
+9.5
+addRec : Enter Midterm Marks (out of 20.0)
+15
+addRec : Enter Final Marks (out of 60.0)
+49
+addRec : Enter Total Marks (out of 100.0)
+83.5
+addRec : End
+main : Do you want to continue (y/n)
+y
+mainMenu : Begin
+mainMenu : <<<MENU>>>
+mainMenu : 1. Add student records
+mainMenu : 2. Delete student records
+mainMenu : 3. Update student records
+mainMenu : 4. View all student records
+mainMenu : 5. Calculate an average of a selected student's scores
+mainMenu : 6. Show student who gets the max total scores
+mainMenu : 7. Show student who gets the min total scores
+mainMenu : 8. Find student by ID
+mainMenu : 9. Sort records by total scores
+mainMenu : Enter your choice
+4
+mainMenu : End
+view : Begin
+
+----------------------------------------------------------------------------------------
+R.No.	Name		Sex	Quiz1	Quiz2	Assg	MidTerm	 Final	Total
+----------------------------------------------------------------------------------------
+  2	Amra	 F	 4.0	 3.5	9.5	 15.0	 49.0	 83.5
+----------------------------------------------------------------------------------------
+
+view : End
+main : Do you want to continue (y/n)
+y
+mainMenu : Begin
+mainMenu : <<<MENU>>>
+mainMenu : 1. Add student records
+mainMenu : 2. Delete student records
+mainMenu : 3. Update student records
+mainMenu : 4. View all student records
+mainMenu : 5. Calculate an average of a selected student's scores
+mainMenu : 6. Show student who gets the max total scores
+mainMenu : 7. Show student who gets the min total scores
+mainMenu : 8. Find student by ID
+mainMenu : 9. Sort records by total scores
+mainMenu : Enter your choice
+2
+mainMenu : End
+delRec : Begin
+delRec : Sure you want to delete Records?
+y
+delRec : End
+main : Do you want to continue (y/n)
+y
+mainMenu : Begin
+mainMenu : <<<MENU>>>
+mainMenu : 1. Add student records
+mainMenu : 2. Delete student records
+mainMenu : 3. Update student records
+mainMenu : 4. View all student records
+mainMenu : 5. Calculate an average of a selected student's scores
+mainMenu : 6. Show student who gets the max total scores
+mainMenu : 7. Show student who gets the min total scores
+mainMenu : 8. Find student by ID
+mainMenu : 9. Sort records by total scores
+mainMenu : Enter your choice
+4
+mainMenu : End
+view : Begin
+
+----------------------------------------------------------------------------------------
+R.No.	Name		Sex	Quiz1	Quiz2	Assg	MidTerm	 Final	Total
+----------------------------------------------------------------------------------------
+  2	Amra	 F	 4.0	 3.5	9.5	 15.0	 49.0	 83.5
+----------------------------------------------------------------------------------------
+
+view : End
+main : Do you want to continue (y/n)
+y
+mainMenu : Begin
+mainMenu : <<<MENU>>>
+mainMenu : 1. Add student records
+mainMenu : 2. Delete student records
+mainMenu : 3. Update student records
+mainMenu : 4. View all student records
+mainMenu : 5. Calculate an average of a selected student's scores
+mainMenu : 6. Show student who gets the max total scores
+mainMenu : 7. Show student who gets the min total scores
+mainMenu : 8. Find student by ID
+mainMenu : 9. Sort records by total scores
+mainMenu : Enter your choice
+4
+mainMenu : End
+view : Begin
+
+----------------------------------------------------------------------------------------
+R.No.	Name		Sex	Quiz1	Quiz2	Assg	MidTerm	 Final	Total
+----------------------------------------------------------------------------------------
+  2	Amra	 F	 4.0	 3.5	9.5	 15.0	 49.0	 83.5
+----------------------------------------------------------------------------------------
+
+view : End
+main : Do you want to continue (y/n)
+n
+main : End
+
+Q. Why If I add record, my previous entere record disapper, and Why on choosing delete records, Records is not getting deleted??

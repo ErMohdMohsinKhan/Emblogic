@@ -1,0 +1,96 @@
+typedef struct
+{
+	int feet;
+	float inch;
+}gD1;
+
+typedef struct
+{
+	int feet;
+	float inch;
+}gD2;
+
+typedef struct
+{
+	int feet;
+	float inch;
+}addDist;
+gD1 getDistance1();
+gD2 getDistance2();
+addDist addDistance(gD1, gD2);
+int displayDistance(gD1, gD2, addDist);
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+addDist addDistance (gD1 da, gD2 db)
+{
+	printf("%s : Begin\n", __func__);
+	addDist ds;
+	ds.feet = da.feet + db.feet;
+	ds.inch = da.inch + db.inch;
+	if (ds.inch >= 12.0)
+	{
+		ds.feet = ds.feet + 1;
+		ds.inch = ds.inch - 12.0;
+	}
+	printf("%s : End\n", __func__);
+	return ds;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int displayDistance (gD1 da, gD2 db, addDist ds)
+{
+	printf("%s : Begin\n", __func__);
+	printf("%s : %d\' %.2f\" + %d\' %.2f\" = %d\' %.2f\"\n",__func__, da.feet, da.inch, db.feet, db.inch, ds.feet, ds.inch);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+gD1 getDistance1 (void)
+{
+        printf("%s : Begin\n", __func__);
+	gD1 d;
+	printf("%s : Enter the Distance in feet/inch\n", __func__);
+	scanf("%d%f", &d.inch, &d.feet);
+        printf("%s : End\n", __func__);
+        return d;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+gD2 getDistance2 (void)
+{
+        printf("%s : Begin\n", __func__);
+	gD2 d;
+	printf("%s : Enter the Distance in feet/inch\n", __func__);
+	scanf("%d%f", &d.inch, &d.feet);
+        printf("%s : End\n", __func__);
+        return d;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int main (void)
+{
+	gD1 da;
+	gD2 db;
+	addDist ds;
+	printf("%s : Begin\n", __func__);
+	da = getDistance1();
+	db = getDistance2();
+	ds = addDistance(da, db);
+	displayDistance(da, db, ds);
+	printf("%s : End\n", __func__);
+	return 0;
+}

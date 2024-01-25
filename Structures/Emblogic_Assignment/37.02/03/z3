@@ -1,0 +1,416 @@
+typedef struct
+{
+int stnumber;
+char stname[20];
+char sex;
+float quiz1;
+float quiz2;
+float assignment;
+float midterm;
+float fin;
+float total;
+}student;
+extern int numStudents;
+int mainMenu();
+int addRec(student**, int*);
+int delRec(student**, int*);
+int updRec(student*, int);
+int view(student*, int);
+int agst(student**, int*);
+int maxSc(student*, int);
+int minSc(student*, int);
+int stdId(student*, int);
+int sortTot(student**, int*);
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int addRec(student **st, int *numStudents) {
+    printf("%s : Begin\n", __func__);
+    // Increase the size of the student array by one
+    *st = (student *)realloc(*st, (*numStudents + 1) * sizeof(student));
+    if (!(*st)) {
+        perror("realloc");
+        exit(EXIT_FAILURE);
+    }
+
+    student *newStudent = *st + *numStudents; // Point to the new student record
+    printf("%s : Enter student number\n", __func__);
+    scanf("%d", &newStudent->stnumber);
+    getchar();
+    printf("%s : Enter student name\n", __func__);
+    fgets(newStudent->stname, 20, stdin);
+    int len = strlen(newStudent->stname);
+    newStudent->stname[len - 1] = '\0';
+    printf("%s : Enter sex (M/F)\n", __func__);
+    scanf(" %c", &newStudent->sex);
+    printf("%s : Enter Quiz1 Marks (out of 5.0)\n", __func__);
+    scanf("%f", &newStudent->quiz1);
+    printf("%s : Enter Quiz2 Marks (out of 5.0)\n", __func__);
+    scanf("%f", &newStudent->quiz2);
+    printf("%s : Enter Assignment Marks (out of 10.0)\n", __func__);
+    scanf("%f", &newStudent->assignment);
+    printf("%s : Enter Midterm Marks (out of 20.0)\n", __func__);
+    scanf("%f", &newStudent->midterm);
+    printf("%s : Enter Final Marks (out of 60.0)\n", __func__);
+    scanf("%f", &newStudent->fin);
+    printf("%s : Enter Total Marks (out of 100.0)\n", __func__);
+    scanf("%f", &newStudent->total);
+
+    (*numStudents)++;
+    printf("%s : End\n", __func__);
+    return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int agst(student **st, int *numStudents) {
+    printf("%s : Begin\n", __func__);
+    int res;
+    printf("%s : Enter the Record number between 1 to %d\n", __func__, *numStudents);
+    scanf("%d", &res);
+    res = res - 1;
+    if ((res >= 0) && (res < *numStudents)) {
+        float qz1 = (*st)[res].quiz1;
+        float qz2 = (*st)[res].quiz2;
+        float asg = (*st)[res].assignment;
+        float midterm = (*st)[res].midterm;
+        float fin = (*st)[res].fin;
+        float tot = (*st)[res].total;
+        float sum = qz1 + qz2 + asg + midterm + fin + tot;
+        float avg = sum / 6.0;
+        printf("%s : Sum : %.2f\tAverage : %.2f\n", __func__, sum, avg);
+    } else {
+        printf("%s : Invalid record number\n", __func__);
+    }
+    printf("%s : End\n", __func__);
+    return 0;
+}
+
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+int delRec(student **st, int *numStudents) {
+    printf("%s : Begin\n", __func__);
+    int stNumberToDelete;
+    int indexToDelete = -1;
+
+    if (*numStudents == 0) {
+        printf("No records to delete.\n");
+        printf("%s : End\n", __func__);
+        return 0;
+    }
+
+    printf("%s : Enter student number to delete: \n", __func__);
+    scanf("%d", &stNumberToDelete);
+
+    for (int i = 0; i < *numStudents; i++) {
+        if ((*st)[i].stnumber == stNumberToDelete) {
+            indexToDelete = i;
+            break;
+        }
+    }
+
+    if (indexToDelete == -1) {
+        printf("Student with the given number not found.\n");
+    } else {
+        // Shift elements to overwrite the element at indexToDelete
+        for (int i = indexToDelete; i < *numStudents - 1; i++) {
+            (*st)[i] = (*st)[i + 1];
+        }
+        (*numStudents)--;
+        printf("Student with number %d deleted successfully.\n", stNumberToDelete);
+    }
+
+    printf("%s : End\n", __func__);
+    return 0;
+}
+
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+int numStudents = 0;
+int main (void)
+{
+	printf("%s : Begin\n", __func__);
+	student *st = NULL;
+	//int numStudents = 0;
+        /*st = (student*) malloc(20 * sizeof(student));
+        if (!st)
+        {
+                perror("malloc");
+                exit(EXIT_FAILURE);
+        }
+		*/
+	int ch;
+	char res;
+	while (1)
+	{
+	ch = mainMenu();
+	switch(ch)
+	{
+		case 1:
+			addRec(&st, &numStudents);
+			break;
+		case 2:
+			delRec(&st, &numStudents);
+			break;
+		case 3:
+			updRec(st, numStudents);
+			break;
+		case 4:
+			view(st, numStudents);
+			break;
+		case 5:
+			agst(&st, &numStudents);
+			break;
+		case 6:
+			maxSc(st, numStudents);
+			break;
+		case 7:
+			minSc(st, numStudents);
+			break;
+		case 8:
+			stdId(st, numStudents);
+			break;
+		case 9:
+			sortTot(&st, &numStudents);
+			break;
+	}
+	printf("%s : Do you want to continue (y/n)\n", __func__);
+	scanf(" %c", &res);
+	if (res == 'n')
+		break;
+	}
+	free(st);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int mainMenu (void)
+{
+	printf("%s : Begin\n", __func__);
+
+	printf("%s : <<<MENU>>>\n", __func__);
+
+	printf("%s : 1. Add student records\n", __func__);
+	printf("%s : 2. Delete student records\n", __func__);
+	printf("%s : 3. Update student records\n", __func__);
+	printf("%s : 4. View all student records\n", __func__);
+	printf("%s : 5. Calculate an average of a selected student's scores\n", __func__);
+	printf("%s : 6. Show student who gets the max total scores\n", __func__);
+	printf("%s : 7. Show student who gets the min total scores\n", __func__);
+	printf("%s : 8. Find student by ID\n", __func__);
+	printf("%s : 9. Sort records by total scores\n", __func__);
+	
+	int choice;
+	printf("%s : Enter your choice\n", __func__);
+	scanf("%d", &choice);
+
+	printf("%s : End\n", __func__);
+	return choice;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int maxSc (student *st, int numStudents)
+{
+	printf("%s : Begin\n", __func__);
+	int i =0;
+	int var = 0;
+	float highest = (st)[0].total;
+	char name[20];
+	for (i=1; i<numStudents; i++)
+	{
+		if (highest < (st)[i].total)
+		{
+			highest = (st)[i].total;
+			var = i;
+		}
+	}
+	
+	printf("%s : Highest total is %.2f of %s\n", __func__, highest, (st)[var].stname);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int minSc (student *st, int numStudents)
+{
+        printf("%s : Begin\n", __func__);
+        int i =0;
+        int var = 0;
+        float lowest = (st)[0].total;
+        char name[20];
+        for (i=1; i<numStudents; i++)
+        {
+                if (lowest > (st)[i].total)
+                {
+                        lowest = (st)[i].total;
+                        var = i;
+                }
+        }
+
+        printf("%s : Lowest total is %.2f of %s\n", __func__, lowest, (st)[var].stname);
+        printf("%s : End\n", __func__);
+        return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int sortTot (student **st, int *numStudents)
+{
+	printf("%s : Begin\n", __func__);
+	char res;
+	int i, j, total_h;
+	//total_h = st[0].total;
+	printf("%s : Do you want to Sort Total in Descending Order (y/n)\n", __func__);
+	scanf(" %c", &res);
+	if (res == 'y')
+	{
+		for (j=0; j<*numStudents-1;  j++)
+		{
+			for (i=0; i<*numStudents-1-j; i++)
+			{
+				if (st[i]->total < st[i+1]->total)
+				{
+					student temp = *st[i];
+    					*st[i] = *st[i+1];
+   	 				*st[i+1] = temp;
+				}
+			}
+		}	
+	}
+	
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int stdId (student *st, int numStudents)
+{
+	printf("%s : Begin\n", __func__);
+	int res, i, num;
+	num = -1;
+	printf("%s : Enter the ID number\n", __func__);
+	scanf("%d", &res);
+	for (i=0; i<numStudents; i++)
+	{
+		if (res == st[i].stnumber)
+		{
+			num = i;
+			break;	
+		}
+	}
+	if (num != -1)
+	{
+	printf("%s : Record for Student ID %d\n", __func__, res);
+	printf("\n----------------------------------------------------------------------------------------\n");
+        printf("R.No.\tName\t\tSex\tQuiz1\tQuiz2\tAssg\tMidTerm\t Final\tTotal\n");
+        printf("----------------------------------------------------------------------------------------\n");
+	printf("%3d\t%s\t %c\t %.1f\t %.1f\t%.1f\t %.1f\t %.1f\t %.1f\n", st[i].stnumber, st[i].stname, st[i].sex, st[i].quiz1, st[i].quiz2, st[i].assignment, st[i].midterm, st[i].fin, st[i].total);
+	}
+	else
+		printf("%s : No record found with Student ID %d\n", __func__, res);
+	printf("%s : End\n", __func__);
+	return 0;
+}
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int updRec(student *st, int numStudents)
+{
+    printf("%s : Begin\n", __func__);
+    int rec;
+    printf("%s : Enter the Record number between 1 to %d be updated\n", __func__, numStudents);
+    scanf("%d", &rec);
+    int i;
+    int indexToUpdate = -1;
+    for (i = 0; i < numStudents; i++)
+    {
+        if (st[i].stnumber == rec)
+        {
+            printf("%s : Record found ..... \n", __func__);
+            indexToUpdate = i;
+            break;
+        }
+    }
+    if (indexToUpdate != -1)
+    {
+        printf("%s : Enter the fresh value\n", __func__);
+        printf("%s : Enter student number\n", __func__);
+        scanf("%d", &st[indexToUpdate].stnumber);
+        getchar();
+        printf("%s : Enter student name\n", __func__);
+        fgets(st[indexToUpdate].stname, 20, stdin);
+        int len = strlen(st[indexToUpdate].stname);
+        st[indexToUpdate].stname[len - 1] = '\0';
+        printf("%s : Enter sex (M/F)\n", __func__);
+        scanf(" %c", &st[indexToUpdate].sex);
+        printf("%s : Enter Quiz1 Marks (out of 5.0)\n", __func__);
+        scanf("%f", &st[indexToUpdate].quiz1);
+        printf("%s : Enter Quiz2 Marks (out of 5.0)\n", __func__);
+        scanf("%f", &st[indexToUpdate].quiz2);
+        printf("%s : Enter Assignment Marks (out of 10.0)\n", __func__);
+        scanf("%f", &st[indexToUpdate].assignment);
+        printf("%s : Enter Midterm Marks (out of 20.0)\n", __func__);
+        scanf("%f", &st[indexToUpdate].midterm);
+        printf("%s : Enter Final Marks (out of 60.0)\n", __func__);
+        scanf("%f", &st[indexToUpdate].fin);
+        printf("%s : Enter Total Marks (out of 100.0)\n", __func__);
+        scanf("%f", &st[indexToUpdate].total);
+
+        printf("Updated student number: %d\n", st[indexToUpdate].stnumber);
+        printf("Updated student name: %s\n", st[indexToUpdate].stname);
+    }
+    else
+    {
+        printf("%s : Invalid record number\n", __func__);
+    }
+
+    printf("%s : End\n", __func__);
+    return 0;
+}
+
+#include "headers.h"
+#include "dataStructures.h"
+#include "declarations.h"
+
+int view (student *st,  int numStudents)
+{
+	printf("%s : Begin\n", __func__);
+	if (st != NULL)
+	{
+	printf("\n----------------------------------------------------------------------------------------\n");
+	printf("R.No.\tName\t\tSex\tQuiz1\tQuiz2\tAssg\tMidTerm\t Final\tTotal\n");
+	printf("----------------------------------------------------------------------------------------\n");
+	for (int i = 0; i < numStudents; i++)
+	{
+	printf("%3d\t%s\t %c\t %.1f\t %.1f\t%.1f\t %.1f\t %.1f\t %.1f\n", st[i].stnumber, st[i].stname, st[i].sex, st[i].quiz1, st[i].quiz2, st[i].assignment, st[i].midterm, st[i].fin, st[i].total);
+	}
+	printf("----------------------------------------------------------------------------------------\n\n");
+	}
+	
+	else
+	{
+		printf("%s : No Records to show\n", __func__);
+	}
+	printf("%s : End\n", __func__);
+	return 0;
+}
