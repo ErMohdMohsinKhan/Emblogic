@@ -1,0 +1,1 @@
+savedcmd_/root/CDD4/mycdd.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T scripts/module.lds -o /root/CDD4/mycdd.ko /root/CDD4/mycdd.o /root/CDD4/mycdd.mod.o;  make -f ./arch/x86/Makefile.postlink /root/CDD4/mycdd.ko
