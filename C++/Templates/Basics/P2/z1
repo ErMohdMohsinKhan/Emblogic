@@ -1,0 +1,61 @@
+vim headers.h
+#include <iostream>
+
+vim class.h
+using namespace std;
+template <class T>
+class Arth
+{
+        private:
+                T a;
+                T b;
+        public:
+                Arth(T, T);
+                T add();
+                T sub();
+};
+
+vim main.cpp
+
+#include "headers.h"
+#include "class.h"
+//template <class T>
+int main ()
+{
+        int c1, c2;
+        cout<<"Enter two values "<<endl;
+        cin >> c1 >> c2;
+        Arth <int> r(c1, c2);
+        cout<< "Add : "<<r.add()<<endl;
+        cout<< "Sub : "<<r.sub()<<endl;
+        return 0;
+}
+
+vim const.cpp
+#include "headers.h"
+#include "class.h"
+template <class T>
+Arth <T>::Arth(T v1, T v2)
+{
+        this->a = v1;
+        this->b = v2;
+}
+
+vim add.cpp
+#include "headers.h"
+#include "class.h"
+template <class T>
+T Arth<T>::add()
+{
+        return (a+b);
+}
+
+vim sub.cpp
+#include "headers.h"
+#include "class.h"
+template <class T>
+T Arth<T>::sub()
+{
+        return (a-b);
+}
+
